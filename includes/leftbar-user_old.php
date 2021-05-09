@@ -13,13 +13,13 @@
                                     <li class="nav-header">
                                         <span class="">Appearance</span>
                                     </li>
-                                    <li><a href="user_index.php"><i class="fa fa fa-users"></i> <span> User</span></a></li>
+                                    <li><a href="manage-users.php"><i class="fa fa fa-users"></i> <span> User</span></a></li>
                                     <li class="has-children">
-                                        <a href="#"><i class="fa fa-file-text"></i> <span>กิจกรรมโฮมรูม</span> <i class="fa fa-angle-right arrow"></i></a>
+                                        <a href="#"><i class="fa fa-file-text"></i> <span>ส่งข้อมูลการปฏิบัติงาน</span> <i class="fa fa-angle-right arrow"></i></a>
                                         <ul class="child-nav">
-                                            <li><a href="manage-students-homeroom.php"><i class="fa fa-bars"></i> <span>เช็คชื่อกิจกรรมโฮมรูม</span></a></li>
-                                            <li><a href="add-activity-homeroom.php"><i class="fa fa fa-server"></i> <span>บันทึกกิจกรรมโฮมรูม</span></a></li>
-                                            <li><a href="#"><i class="fa fa fa-server"></i> <span>จัดการกิจกรรมโฮมรูม</span></a></li>
+                                            <li><a href="manage-homeroom.php"><i class="fa fa-bars"></i> <span>กิจกรรมโฮมรูม</span></a></li>
+                                            <li><a href="#"><i class="fa fa fa-server"></i> <span>กิจกรรมหน้าเสาธง</span></a></li>
+                                            <li><a href="#"><i class="fa fa fa-server"></i> <span>กิจกรรมเยี่ยมบ้านผู้เรียน</span></a></li>
                                         </ul>
                                     </li>
                                     <li class="has-children">
