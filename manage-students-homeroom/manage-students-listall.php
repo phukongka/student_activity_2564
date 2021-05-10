@@ -1,4 +1,6 @@
 <?php
+session_start();
+session_destroy();
 include('../includes/config.inc.php');
 //if (isset($_GET['submit'])){
    // $user=$_GET['group'];
