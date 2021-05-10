@@ -1,6 +1,24 @@
 <?php
+session_start();
 include('../includes/config.inc.php');
-$week = $_GET['week'];
+if(!empty($_GET['week'])){
+ $week = $_GET['week'];
+ $_SESSION["week1"] =  $week;
+}
+?>
+<<script>
+ function prev(){
+     alert('ข้อมูลได้บันทึกแล้ว กรุณาบันทึกสัปดาห์ใหม่');
+     window.location="manage-students-listall.php";
+
+ }
+</script>
+
+<?php
+// if(empty($week)){
+//     header('Location: manage-students-listall.php');
+//     exit;
+// }
 
 //if (isset($_GET['submit'])){
    // $user=$_GET['group'];
@@ -22,45 +40,44 @@ $week = $_GET['week'];
   $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
 
 // insert ลงตาราง homeroom 
-//echo "before-send-data";
+
 if(!empty($_POST["submit"])){
     // TODO
-    var_dump($_POST);
-   $student_id = $_POST['student_id'];
-   $check_ = $_POST['check_'];
-   $limit = count($_POST['check_']);
-   echo "check=".$limit."<br>";
-   $limit1 = count($_POST['student_id']);
-   echo "std_id=".$limit1;
-//   $Date = mysql_real_escape_string($_POST['trans_date']);
+    // ตรวจสอบเคยบันทึกมาแล้วหรือยัง
+    echo "again"."<br>";
+   // break;
+    $week = $_POST['week'];
+    echo "week=".$week[1];
+    $sql2 = "SELECT * FROM home_room_check WHERE week_check = '$week[1]' ";
+    $result2 = mysqli_query($conn, $sql2);
+    $num_row = mysqli_num_rows($result2);
+    if($num_row > 0 ){
+    echo "<script>";
+    echo "prev()";
+    echo "</script>";
+    exit();
 
-
-    for ($i=0; $i<$limit; $i++)
-    {
-        echo "id=".$student_id[$i]."||";
-        echo "status=".$check_[$i]."<br>";
-       
     }
-    //foreach Loop  12 field
- //   if(count($_POST['id'])>0){
-		// foreach($_POST['check_'] as $index=>$value){
-		// 	echo $index." => ".$value."||".$student_id."<br />";
-		// }
-
-//	}
-
-
-//     $sql = "INSERT INTO home_room_check VALUES ('', '$user', '$clearpass',':=','$passwd')";        
-//     if ($conn->query($sql) === TRUE) {
-//       echo "New record created successfully";
-//     } else {
-//       echo "Error: " . $sql . "<br>" . $conn->error;
-//     }
-//     $conn->close();
-//   }else{
-//     //TODO
-//     echo "no";
-//   }
+    
+ // var_dump($_POST);
+   $student_id = $_POST['student_id'];
+   
+   $user_id = $_POST['user_id'];
+   $major_id = $_POST['major_id'];
+  // $minor_id = $_POST['minor_id'];
+   $group_id = $_POST['group_id'];
+   $check_ = $_POST['check_'];  
+   $limit = count($_POST['check_']);
+//    echo "check=".$limit."<br>";
+//    $Date = mysql_real_escape_string($_POST['trans_date']);
+    for ($i=0; $i<$limit; $i++) {
+        $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week[$i]','$student_id[$i]',NOW(),'$user_id[$i]','$major_id[$i]','minor_id','$group_id[$i]','$check_[$i]')";        
+          if ($conn->query($sql) === FALSE) {
+           //   echo "New record created successfully"
+              echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+  }
+   $conn->close();
 }
   ?>
 
@@ -144,7 +161,7 @@ if(!empty($_POST["submit"])){
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                 <h5>เช็คชื่อเข้าร่วม  กิจกรรมโฮมรูม สัปดาห์ที่.<?php echo $week ?>.. สาขาวิชา...<?php echo $row1['major_name']?> อาจารย์ที่ปรึกษา  <?php echo $row['user_name'];?></h5>
+                                                 <h5>เช็คชื่อเข้าร่วม  กิจกรรมโฮมรูม สัปดาห์ที่.<?php echo $_SESSION["week1"]  ?>.. สาขาวิชา...<?php echo $row1['major_name']?> อาจารย์ที่ปรึกษา  <?php echo $row['user_name'];?></h5>
                                                 </div>
                                             </div>  
                                             <div class="panel-body p-20">
@@ -179,7 +196,7 @@ if(!empty($_POST["submit"])){
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
   $number= 0; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
-  
+    $number++;
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];
@@ -230,8 +247,7 @@ if(!empty($_POST["submit"])){
                                                 <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
                                                 <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
                                                 <input type="hidden" name="major_id[]" value="<?php echo $major_id ?>">
-                                                <input type="hidden" name="minor_id[]" value="<?php echo $minor_id ?>">
-                                                <input type="hidden" name="week[]" value="<?php echo $week ?>">
+                                                <input type="hidden" name="week[]" value="<?php echo $_SESSION["week1"] ?>">
                                                 <input type="hidden" name="user_id[]" value="<?php echo $user ?>">
 <?php  
 $no++; // ลำดับ
