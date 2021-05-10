@@ -1,6 +1,7 @@
 <?php
 include('../includes/config.inc.php');
 $week = $_GET['week'];
+
 //if (isset($_GET['submit'])){
    // $user=$_GET['group'];
   $user = '7071003';
@@ -20,27 +21,31 @@ $week = $_GET['week'];
   $minor_id = $row1['minor_id'];
   $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
 
-
 // insert ลงตาราง homeroom 
-echo "before-send-data";
+//echo "before-send-data";
 if(!empty($_POST["submit"])){
     // TODO
-  echo "send-data";
+    var_dump($_POST);
    $student_id = $_POST['student_id'];
-   $prefix = $_POST['prefix'];
-   $std_name = $_POST['std_name'];
-   $std_lastname = $_POST['std_lastname'];
-   $std_lavel = $_POST['std_lavel'];
-   $group_id = $_POST['group_id'];
-   $major_id = $_POST['group_id'];
-   $minor_id = $_POST['group_id'];
-   $week = $_POST['group_id'];
-   $user_id = $_POST['user_id'];
+   $check_ = $_POST['check_'];
+   $limit = count($_POST['check_']);
+   echo "check=".$limit."<br>";
+   $limit1 = count($_POST['student_id']);
+   echo "std_id=".$limit1;
+//   $Date = mysql_real_escape_string($_POST['trans_date']);
+
+
+    for ($i=0; $i<$limit; $i++)
+    {
+        echo "id=".$student_id[$i]."||";
+        echo "status=".$check_[$i]."<br>";
+       
+    }
     //foreach Loop  12 field
  //   if(count($_POST['id'])>0){
-		foreach($_POST['check_'] as $index=>$value){
-			echo $index." => ".$value."||".$student_id."<br />";
-		}
+		// foreach($_POST['check_'] as $index=>$value){
+		// 	echo $index." => ".$value."||".$student_id."<br />";
+		// }
 
 //	}
 
@@ -170,20 +175,21 @@ if(!empty($_POST["submit"])){
                                                     <form action="manage-students-homeroom.php" method="POST" >
                                                     <tbody>
 <?php
-  $no =0;
-  $id =0;
+  $no = 0; // ตัวแปรสำหรับ ตรวจสอบ ขาด ลา มาสาย
+  $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
+  $number= 0; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
-   $no++; // ลำดับ
-   $id++;// label name for
+  
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];
    $std_lastname = $row['std_lastname'];
    $std_level = $row['std_level'];
    $group_id = $row['group_id'];
+  
 ?>
                                                          <tr>
-                                                            <td><?php echo $no;?></td>
+                                                            <td><?php echo $number;?></td>
                                                             <td><?php echo $row['student_id'];?></td>
                                                             <td> <?php echo $row['prefix'].$row['std_name']."&nbsp;&nbsp;".$row['std_lastname'];?></td>  
                                                             <td><?php echo $major_name;?></td>        
@@ -209,7 +215,8 @@ if(!empty($_POST["submit"])){
                                                                 <label for="pomegranate<?php echo $id ?>">สาย</label>
                                                             </div>
                                                             <?php 
-                                                            $id++ ;
+                                                            
+                                                            $id++;// label name for
                                                             ?>
                                                             <div class="radio icheck-sunflower">
                                                                 <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="4" />
@@ -217,21 +224,23 @@ if(!empty($_POST["submit"])){
                                                             </div>
                                                             </td>
                                                             </tr>
+                                                <input type="hidden" name="student_id[]" value="<?php echo $student_id ?>">
+                                                <input type="hidden" name="prefix[]" value="<?php echo $prefix ?>">
+                                                <input type="hidden" name="std_name[]" value="<?php echo $std_name ?>">
+                                                <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
+                                                <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
+                                                <input type="hidden" name="major_id[]" value="<?php echo $major_id ?>">
+                                                <input type="hidden" name="minor_id[]" value="<?php echo $minor_id ?>">
+                                                <input type="hidden" name="week[]" value="<?php echo $week ?>">
+                                                <input type="hidden" name="user_id[]" value="<?php echo $user ?>">
 <?php  
-  }
-  ?>
+$no++; // ลำดับ
+}
+?>
                                                     </tbody>
+
                                                 </table>
-                                               <input type="hidden" name="student_id" value="<?php echo $student_id ?>">
-                                                <input type="hidden" name="prefix" value="<?php echo $prefix ?>">
-                                                <input type="hidden" name="std_name" value="<?php echo $std_name ?>">
-                                                <input type="hidden" name="std_lastname" value="<?php echo $std_lastname ?>">
-                                                <input type="hidden" name="student_id" value="<?php echo $student_id ?>">
-                                                <input type="hidden" name="group_id" value="<?php echo $group_id ?>">
-                                                <input type="hidden" name="major_id" value="<?php echo $major_id ?>">
-                                                <input type="hidden" name="minor_id" value="<?php echo $minor_id ?>">
-                                                <input type="hidden" name="week" value="<?php echo $week ?>">
-                                                <input type="hidden" name="user_id" value="<?php echo $user ?>">>
+                                               
                                                 <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
                                                 </form>
                                                 <!-- /.col-md-12 -->
