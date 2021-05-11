@@ -13,4 +13,27 @@ s.minor_id,s.group_id,sg.id,sg.user_id,sg.group_id,sg.co_advisor
 INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = 7071003
 
 
+SELECT * FROM `general_user` as u 
+INNER JOIN student_group as sg ON u.user_id = sg.user_id  
+INNER JOIN student as s ON s.group_id = sg.group_id 
+where u.user_id = 7071003
+
+////นับ ขาดลามาสาย
+5. SELECT DISTINCT COUNT( IF(week_check = 3,
+		IF(check_status = 1,week_check,NULL),
+                 NULL)) AS num,
+		COUNT( IF(week_check = 3,
+		IF(check_status = 2,week_check,NULL),
+                 NULL)) AS num2,
+		COUNT( IF(week_check = 3,
+		IF(check_status = 3,week_check,NULL),
+                 NULL)) AS num3,
+		COUNT( IF(week_check = 3,
+		IF(check_status = 4,week_check,NULL),
+                 NULL)) AS num4,
+		COUNT( IF(week_check = 3,
+		IF(check_status,week_check,NULL),
+                 NULL)) AS tatal
+FROM
+    home_room_check;
 
