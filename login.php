@@ -1,6 +1,6 @@
 <?php     
 	//session_start();
-    include "includes/config_db.php";
+    include "includes/config.inc.php";
 
 		if (isset($_POST['login'])) {
 		//	$user_pass = md5($_POST['user_pass']);
