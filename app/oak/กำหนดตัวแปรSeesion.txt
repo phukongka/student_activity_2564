@@ -1,0 +1,6 @@
+name_session
+$name_login =  email,user_id
+$pass_login =  password
+
+$week
+$status ของ User

@@ -6,7 +6,7 @@ if(!empty($_GET['week'])){
  $_SESSION["week1"] =  $week;
 }
 ?>
-<<script>
+<script>
  function prev(){
      alert('ข้อมูลได้บันทึกแล้ว กรุณาบันทึกสัปดาห์ใหม่');
      window.location="manage-students-listall.php";
@@ -44,7 +44,7 @@ if(!empty($_GET['week'])){
 if(!empty($_POST["submit"])){
     // TODO
     // ตรวจสอบเคยบันทึกมาแล้วหรือยัง
-    echo "again"."<br>";
+   // echo "again"."<br>";
    // break;
     $week = $_POST['week'];
     echo "week=".$week[1];
@@ -59,7 +59,7 @@ if(!empty($_POST["submit"])){
 
     }
     
- // var_dump($_POST);
+  // var_dump($_POST);
    $student_id = $_POST['student_id'];
    
    $user_id = $_POST['user_id'];
@@ -75,9 +75,22 @@ if(!empty($_POST["submit"])){
           if ($conn->query($sql) === FALSE) {
            //   echo "New record created successfully"
               echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        //echo "i=".$i;
+        // echo "<script> alert('updatae'); </script>";
+         if($i > 26){
+         echo "update status";
+         echo "<script> alert('updatae'); </script>";
+            $sql3 = "UPDATE home_room_class SET active_status=2 WHERE week='$week[$i]'";
+            if ($conn->query($sql3) === TRUE) {
+            echo "Record updated successfully";
+            } else {
+            echo "Error updating record: " . $conn->error;
             }
-  }
+        }
+    }// end for
    $conn->close();
+ 
 }
   ?>
 
@@ -237,7 +250,7 @@ if(!empty($_POST["submit"])){
                                                             ?>
                                                             <div class="radio icheck-sunflower">
                                                                 <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="4" />
-                                                                <label for="pomegranate<?php echo $id ?>">ป่วย</label>
+                                                                <label for="pomegranate<?php echo $id ?>">ลา</label>
                                                             </div>
                                                             </td>
                                                             </tr>

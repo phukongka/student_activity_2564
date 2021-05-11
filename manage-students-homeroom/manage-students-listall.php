@@ -131,8 +131,10 @@ include('../includes/config.inc.php');
    $user_id = $row['user_id'];
    if($active_status == 1){
      $status = "เข้าเช็คกิจกรรมโฮมรูม" ;
+   }else if($active_status == 2){
+     $status = "แก้ไขข้อมูล" ;
    }else{
-     $status = "ยังไม่เปิดใช้งาน" ;
+    $status = "ยังไม่เปิดใช้งาน" ;
    }
 
 

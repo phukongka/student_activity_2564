@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-05-07 16:18:43
+Date: 2021-05-11 12:26:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -331,23 +331,50 @@ CREATE TABLE `home_risk_topic` (
 DROP TABLE IF EXISTS `home_room_check`;
 CREATE TABLE `home_room_check` (
   `home_check_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสการเช็กชื่อกิจกรรมโฮมรูม',
-  `type` int(10) DEFAULT NULL COMMENT 'รูปแบบกิจกรรม',
-  `home_id` int(10) NOT NULL COMMENT 'รหัสกิจกรรมโฮมรูม',
+  `type` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รูปแบบกิจกรรม',
+  `home_id` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสกิจกรรมโฮมรูม',
   `date_check` datetime NOT NULL COMMENT 'วันเวลาที่เช็ก',
   `week_check` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'สัปดาห์ที่เช็ก',
   `student_id` varchar(11) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสประจำตัวนักเรียน',
   `save_time` datetime NOT NULL COMMENT 'วันเวลาที่บันทึก',
   `user_id` varchar(13) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสประจำตัวผู้ใช้งานระบบ',
   `major_code` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสสาขาวิชา',
-  `minor_id` varchar(7) COLLATE utf8_thai_520_w2 DEFAULT NULL COMMENT 'รหัสสาขางาน',
+  `minor_id` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสสาขางาน',
   `group_id` varchar(11) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสกลุ่มเรียน',
   `check_status` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'สถานะการเข้าร่วมกิจกรรมโฮมรูม',
   PRIMARY KEY (`home_check_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
 
 -- ----------------------------
 -- Records of home_room_check
 -- ----------------------------
+INSERT INTO `home_room_check` VALUES ('136', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010002', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('137', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010003', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('138', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010004', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('139', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010005', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('140', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010007', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('141', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010008', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('142', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010010', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('143', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010011', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('144', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010012', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('145', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010013', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('146', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010014', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('147', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010015', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('148', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010016', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('149', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010017', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('150', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010018', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('151', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010019', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('152', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010020', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290101', '1');
+INSERT INTO `home_room_check` VALUES ('153', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010021', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('154', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010022', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('155', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010023', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('156', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010024', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('157', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010025', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('158', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010026', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('159', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010027', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('160', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010030', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('161', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010031', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
+INSERT INTO `home_room_check` VALUES ('162', '1', 'h001', '2021-05-11 11:33:32', '3', '6129010032', '2021-05-11 11:33:32', '7071003', '2901', 'minor_id', '61290102', '1');
 
 -- ----------------------------
 -- Table structure for `home_room_class`
@@ -356,19 +383,25 @@ DROP TABLE IF EXISTS `home_room_class`;
 CREATE TABLE `home_room_class` (
   `home_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'รหัสกิจกรรมโฮมรูม',
   `term` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ภาคเรียน',
-  `week` varchar(20) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'สัปดาห์',
+  `week` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'สัปดาห์',
   `date_create` datetime NOT NULL COMMENT 'วันที่สร้างกิจกรรม',
   `date_join` datetime NOT NULL COMMENT 'กำหนดวันที่ให้เข้าร่วม',
-  `date_update` datetime NOT NULL COMMENT 'บันทึกเวลาเมื่อมีการแก้ไข',
+  `date_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT 'บันทึกเวลาเมื่อมีการแก้ไข',
   `user_id` varchar(13) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสประจำตัวผู้ใช้งานระบบ',
   `act_img_id` int(10) NOT NULL COMMENT 'รหัสภาพกิจกรรม',
   `active_status` tinyint(1) NOT NULL COMMENT 'สถานะการเข้ากรอกข้อมูล',
   PRIMARY KEY (`home_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
 
 -- ----------------------------
 -- Records of home_room_class
 -- ----------------------------
+INSERT INTO `home_room_class` VALUES ('1', '1/2564', '1', '2021-05-09 11:47:53', '2021-05-09 11:48:06', '2021-05-11 11:08:10', '7071004', '0', '2');
+INSERT INTO `home_room_class` VALUES ('2', '1/2564', '2', '2021-05-09 11:49:01', '2021-05-16 11:49:10', '2021-05-09 11:49:34', '7071004', '0', '1');
+INSERT INTO `home_room_class` VALUES ('3', '1/2564', '3', '2021-05-09 11:49:43', '2021-05-23 11:49:48', '0000-00-00 00:00:00', '7071004', '0', '1');
+INSERT INTO `home_room_class` VALUES ('4', '1/2564', '4', '2021-05-09 12:04:55', '2021-05-30 12:04:59', '0000-00-00 00:00:00', '7071004', '0', '0');
+INSERT INTO `home_room_class` VALUES ('5', '1/2564', '5', '2021-05-09 12:05:22', '2021-06-06 12:05:53', '0000-00-00 00:00:00', '', '0', '0');
+INSERT INTO `home_room_class` VALUES ('6', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `log`
@@ -405,6 +438,186 @@ CREATE TABLE `major` (
 -- ----------------------------
 -- Records of major
 -- ----------------------------
+INSERT INTO `major` VALUES ('2101', 'ช่างยนต์', '1', 'Auto Me');
+INSERT INTO `major` VALUES ('2102', 'ช่างกลโรงงาน', '1', 'Machine');
+INSERT INTO `major` VALUES ('2103', 'ช่างเชื่อมโลหะ', '1', 'Welding');
+INSERT INTO `major` VALUES ('2104', 'ช่างไฟฟ้ากำลัง', '1', 'Electri');
+INSERT INTO `major` VALUES ('2105', 'ช่างอิเล็กทรอนิกส์', '1', 'Electro');
+INSERT INTO `major` VALUES ('2106', 'ช่างก่อสร้าง', '1', 'Buieldi');
+INSERT INTO `major` VALUES ('2107', 'ช่างเครื่องเรือนและตกแต่งภายใน', '1', 'Furnitu');
+INSERT INTO `major` VALUES ('2108', 'สถาปัตยกรรม', '1', 'Archite');
+INSERT INTO `major` VALUES ('2109', 'สำรวจ', '1', 'Surveyi');
+INSERT INTO `major` VALUES ('2110', 'ช่างเขียนแบบเครื่องกล', '1', 'Mechani');
+INSERT INTO `major` VALUES ('2111', 'ช่างซ่อมบำรุง', '1', 'Mainten');
+INSERT INTO `major` VALUES ('2112', 'ช่างพิมพ์', '1', 'Printin');
+INSERT INTO `major` VALUES ('2116', 'เทคนิคแว่นตาและเลนส์', '1', 'Optical');
+INSERT INTO `major` VALUES ('2117', 'ช่างต่อเรือ', '1', 'Ship Bu');
+INSERT INTO `major` VALUES ('2119', 'โทรคมนาคม', '1', 'Telecom');
+INSERT INTO `major` VALUES ('2121', 'โยธา', '1', 'Civil');
+INSERT INTO `major` VALUES ('2122', 'อุตสาหกรรมยาง', '1', 'Ruber I');
+INSERT INTO `major` VALUES ('2127', 'เมคคาทรอนิกส์', '1', 'Mechatr');
+INSERT INTO `major` VALUES ('2128', 'เทคนิคคอมพิวเตอร์', '1', 'Compute');
+INSERT INTO `major` VALUES ('2129', 'อุตสาหกรรมฟอกหนัง', '1', '');
+INSERT INTO `major` VALUES ('2191', 'ช่างอุตสาหกรรมฐานวิทยาศาสตร์', '1', '');
+INSERT INTO `major` VALUES ('2201', 'การบัญชี', '2', '');
+INSERT INTO `major` VALUES ('2202', 'การตลาด', '2', '');
+INSERT INTO `major` VALUES ('2203', 'การเลขานุการ', '2', '');
+INSERT INTO `major` VALUES ('2204', 'คอมพิวเตอร์ธุรกิจ', '2', '');
+INSERT INTO `major` VALUES ('2209', 'ธุรกิจสถานพยาบาล', '2', '');
+INSERT INTO `major` VALUES ('2210', 'การประชาสัมพันธ์', '2', '');
+INSERT INTO `major` VALUES ('2211', 'ธุรกิจค้าปลีก', '2', '');
+INSERT INTO `major` VALUES ('2212', 'ภาษาต่างประเทศ', '2', '');
+INSERT INTO `major` VALUES ('2219', 'การจัดการด้านความปลอดภัย', '2', '');
+INSERT INTO `major` VALUES ('2291', 'พาณิชยกรรมและบริการฐานวิทยาศาสตร์', '2', '');
+INSERT INTO `major` VALUES ('2301', 'วิจิตรศิลป์', '3', '');
+INSERT INTO `major` VALUES ('2302', 'การออกแบบ', '3', '');
+INSERT INTO `major` VALUES ('2303', 'ศิลปหัตถกรรม', '3', '');
+INSERT INTO `major` VALUES ('2304', 'ศิลปกรรมเซรามิก', '3', '');
+INSERT INTO `major` VALUES ('2305', 'ศิลปหัตถกรรมรูปพรรณและเครื่องประดับ', '3', '');
+INSERT INTO `major` VALUES ('2306', 'การถ่ายภาพและวีดิทัศน์', '3', '');
+INSERT INTO `major` VALUES ('2307', 'เทคโนโลยีศิลปกรรม', '3', '');
+INSERT INTO `major` VALUES ('2308', 'คอมพิวเตอร์กราฟิก', '3', '');
+INSERT INTO `major` VALUES ('2309', 'อุตสาหกรรมเครื่องหนัง', '3', '');
+INSERT INTO `major` VALUES ('2310', 'เครื่องประดับอัญมณี', '3', '');
+INSERT INTO `major` VALUES ('2315', 'ช่างทองหลวง', '3', 'Royal G');
+INSERT INTO `major` VALUES ('2317', 'ศิลปการดนตรี', '3', '');
+INSERT INTO `major` VALUES ('2318', 'การพิมพ์สกรีน', '3', '');
+INSERT INTO `major` VALUES ('2319', 'ออกแบบนิเทศศิลป์', '3', '');
+INSERT INTO `major` VALUES ('2391', 'ศิลปกรรมฐานวิทยาศาสตร์', '3', '');
+INSERT INTO `major` VALUES ('2401', 'แฟชั่นและสิ่งทอ', '4', '');
+INSERT INTO `major` VALUES ('2402', 'อาหารและโภชนาการ', '4', 'Food an');
+INSERT INTO `major` VALUES ('2404', 'อาหารและโภชนาการ', '4', 'Food an');
+INSERT INTO `major` VALUES ('2406', 'คหกรรมศาสตร์', '4', 'Home Ec');
+INSERT INTO `major` VALUES ('2407', 'เสริมสวย', '4', 'Beauty ');
+INSERT INTO `major` VALUES ('2408', 'ธุรกิจคหกรรม', '4', '');
+INSERT INTO `major` VALUES ('2491', 'คหกรรมฐานวิทยาศาตร์', '4', '');
+INSERT INTO `major` VALUES ('2501', 'เกษตรศาสตร์', '5', 'Agricul');
+INSERT INTO `major` VALUES ('2591', 'เทคโนโลยีชีวภาพการเกษตรฐานวิทยาศาสตร์', '5', '');
+INSERT INTO `major` VALUES ('2600', 'ประมง', '6', '');
+INSERT INTO `major` VALUES ('2601', 'เพาะเลี้ยงสัตว์น้ำ', '6', 'Aquacul');
+INSERT INTO `major` VALUES ('2602', 'แปรรูปสัตว์น้ำ', '6', 'Fish Pr');
+INSERT INTO `major` VALUES ('2603', 'ประมงทะเล', '6', 'Marine ');
+INSERT INTO `major` VALUES ('2701', 'การโรงแรม', '7', 'Hospita');
+INSERT INTO `major` VALUES ('2702', 'การท่องเที่ยว', '7', '');
+INSERT INTO `major` VALUES ('2801', 'เทคโนโลยีสิ่งทอ', '8', 'Textile');
+INSERT INTO `major` VALUES ('2802', 'เคมีสิ่งทอ', '8', 'Textile');
+INSERT INTO `major` VALUES ('2803', 'เทคโนโลยีเครื่องนุ่งห่ม', '8', 'Garment');
+INSERT INTO `major` VALUES ('2901', 'เทคโนโลยีสารสนเทศ', '9', '');
+INSERT INTO `major` VALUES ('3101', 'เทคนิคเครื่องกล', '1', 'Mechani');
+INSERT INTO `major` VALUES ('3102', 'เทคนิคการผลิต', '1', 'Product');
+INSERT INTO `major` VALUES ('3103', 'เทคนิคโลหะ', '1', '');
+INSERT INTO `major` VALUES ('3104', 'ไฟฟ้า', '1', 'Electri');
+INSERT INTO `major` VALUES ('3105', 'อิเล็กทรอนิกส์', '1', 'Electro');
+INSERT INTO `major` VALUES ('3106', 'ช่างก่อสร้าง', '1', 'Buildin');
+INSERT INTO `major` VALUES ('3107', 'อุตสาหกรรมเครื่องเรือนและตกแต่งภายใน', '1', 'Furnitu');
+INSERT INTO `major` VALUES ('3108', 'เทคนิคสถาปัตยกรรม', '1', 'Archite');
+INSERT INTO `major` VALUES ('3109', 'สำรวจ', '1', 'Survayi');
+INSERT INTO `major` VALUES ('3110', 'เขียนแบบเครื่องกล', '1', '');
+INSERT INTO `major` VALUES ('3111', 'เทคนิคอุตสาหกรรม', '1', '');
+INSERT INTO `major` VALUES ('3112', 'การพิมพ์', '1', '');
+INSERT INTO `major` VALUES ('3113', 'เทคนิคพลังงาน', '1', '');
+INSERT INTO `major` VALUES ('3115', 'เทคนิคกายอุปกรณ์', '1', '');
+INSERT INTO `major` VALUES ('3116', 'เทคนิคแว่นตาและเลนส์', '1', '');
+INSERT INTO `major` VALUES ('3117', 'เทคโนโลยีการต่อเรือ', '1', '');
+INSERT INTO `major` VALUES ('3119', 'เทคโนโลยีโทรคมนาคม', '1', '');
+INSERT INTO `major` VALUES ('3120', 'เครื่องมือวัดและควบคุม', '1', '');
+INSERT INTO `major` VALUES ('3121', 'โยธา', '1', 'Civil');
+INSERT INTO `major` VALUES ('3122', 'เทคโนโลยียาง', '1', 'Rubber ');
+INSERT INTO `major` VALUES ('3123', 'เคมีอุตสาหกรรม', '1', '');
+INSERT INTO `major` VALUES ('3124', 'ปิโตรเคมี', '1', '');
+INSERT INTO `major` VALUES ('3126', 'ช่างอากาศยาน', '1', '');
+INSERT INTO `major` VALUES ('3127', 'เมคคาทรอนิกส์และหุ่นยนต์', '1', '');
+INSERT INTO `major` VALUES ('3128', 'เทคโนโลยีคอมพิวเตอร์', '1', 'Compute');
+INSERT INTO `major` VALUES ('3201', 'การบัญชี', '2', 'Account');
+INSERT INTO `major` VALUES ('3202', 'การตลาด', '2', 'Marketi');
+INSERT INTO `major` VALUES ('3203', 'การเลขานุการ', '2', 'Secreta');
+INSERT INTO `major` VALUES ('3204', 'คอมพิวเตอร์ธุรกิจ', '2', 'Busines');
+INSERT INTO `major` VALUES ('3205', 'การเงินการธนาคาร', '2', '');
+INSERT INTO `major` VALUES ('3206', 'ธุรกิจการค้าระหว่างระเทศ', '2', '');
+INSERT INTO `major` VALUES ('3207', 'การจัดการทรัพยากรมนุษย์', '2', '');
+INSERT INTO `major` VALUES ('3209', 'ธุรกิจเกษตรและสหกรณ์', '2', '');
+INSERT INTO `major` VALUES ('3211', 'การจัดการธุรกิจค้าปลีก', '2', 'Retail ');
+INSERT INTO `major` VALUES ('3212', 'ภาษาต่างประเทศธุรกิจ', '2', '');
+INSERT INTO `major` VALUES ('3214', 'การจัดการโลจิสติกส์', '2', 'Logisti');
+INSERT INTO `major` VALUES ('3215', 'การจัดการทั่วไป', '2', '');
+INSERT INTO `major` VALUES ('3216', 'การจัดการสำนักงาน', '2', 'Office ');
+INSERT INTO `major` VALUES ('3301', 'วิจิตรศิลป์', '3', 'Fine Ar');
+INSERT INTO `major` VALUES ('3302', 'การออกแบบ', '3', 'Design');
+INSERT INTO `major` VALUES ('3303', 'ศิลปหัตถกรรม', '3', 'Art and');
+INSERT INTO `major` VALUES ('3304', 'เทคโนโลยีเซรามิก', '3', 'Ceramic');
+INSERT INTO `major` VALUES ('3305', 'ศิลปหัตถกรรมรูปพรรณและเครื่องประดับ', '3', 'Metalwa');
+INSERT INTO `major` VALUES ('3306', 'เทคโนโลยีการถ่ายภาพและมัลติมีเดีย', '3', 'Photogr');
+INSERT INTO `major` VALUES ('3307', 'เทคโนโลยีศิลปกรรม', '3', 'Art tec');
+INSERT INTO `major` VALUES ('3308', 'คอมพิวเตอร์กราฟิก', '3', 'Compute');
+INSERT INTO `major` VALUES ('3309', 'เทคโนโลยีผลิตภัณฑ์อุตสาหกรรมเครื่องหนัง', '3', 'Leather');
+INSERT INTO `major` VALUES ('3310', 'เครื่องประดับอัญมณี', '3', 'Jewelry');
+INSERT INTO `major` VALUES ('3311', 'ออกแบบเครื่องประดับอัญมณี', '3', 'Jewelry');
+INSERT INTO `major` VALUES ('3315', 'ช่างทองหลวง', '3', 'Royal G');
+INSERT INTO `major` VALUES ('3317', 'ดนตรีและเทคโนโลยี', '3', 'Music a');
+INSERT INTO `major` VALUES ('3401', 'เทคโนโลยีแฟชั่นและสิ่งทอ', '4', 'Fasion ');
+INSERT INTO `major` VALUES ('3402', 'เทคโนโลยีออกแบบแฟชั่นและสิ่งทอ', '4', 'Fasion ');
+INSERT INTO `major` VALUES ('3403', 'เทคโนโลยีสิ่งทอและเครื่องนุ่งห่ม', '4', 'Textile');
+INSERT INTO `major` VALUES ('3404', 'อาหารและโภชนาการ', '4', 'Food an');
+INSERT INTO `major` VALUES ('3405', 'อุตสาหกรมมอาหาร', '4', 'Food In');
+INSERT INTO `major` VALUES ('3406', 'การบริหารงานคหกรรมศาสตร์', '4', 'Home Ec');
+INSERT INTO `major` VALUES ('3407', 'เทคโนโลยีความงาม', '4', 'beauty ');
+INSERT INTO `major` VALUES ('3501', 'เกษตรศาสตร์', '5', 'Agricul');
+INSERT INTO `major` VALUES ('3502', 'พืชศาสตร์', '5', 'plant S');
+INSERT INTO `major` VALUES ('3503', 'สัตวศาสตร์', '5', 'Animal ');
+INSERT INTO `major` VALUES ('3504', 'สัตวรักษ์', '5', 'Animal ');
+INSERT INTO `major` VALUES ('3505', 'ช่างกลเกษตร', '5', 'Farm Me');
+INSERT INTO `major` VALUES ('3506', 'อุตสาหกรรมเกษตร', '5', 'Agro-In');
+INSERT INTO `major` VALUES ('3507', 'เกษตรอุตสาหกรรม', '5', 'Industr');
+INSERT INTO `major` VALUES ('3508', 'เทคโนโลยีภูมิทัศน์', '5', 'Landsca');
+INSERT INTO `major` VALUES ('3601', 'เพาะเลี้ยงสัตว์น้ำ', '6', 'Aquacul');
+INSERT INTO `major` VALUES ('3602', 'แปรรูปสัตว์น้ำ', '6', 'Fish Pr');
+INSERT INTO `major` VALUES ('3701', 'การโรงแรม', '7', 'Hotel');
+INSERT INTO `major` VALUES ('3702', 'การท่องเที่ยว', '7', 'Tourism');
+INSERT INTO `major` VALUES ('3705', 'การจัดการธุรกิจท่องเที่ยวเกษตรเชิงนิเวศ', '7', '');
+INSERT INTO `major` VALUES ('3707', 'การจัดการประชุมและนิทรรศการ', '7', '');
+INSERT INTO `major` VALUES ('3801', 'เทคโนโลยีสิ่งทอ', '8', '');
+INSERT INTO `major` VALUES ('3802', 'เคมีสิ่งทอ', '8', '');
+INSERT INTO `major` VALUES ('3803', 'เทคโนโลยีเครื่องนุ่งห่ม', '8', '');
+INSERT INTO `major` VALUES ('3804', 'เทคโนโลยีการทอผ้าไหมและผ้าพื้นเมือง', '8', '');
+INSERT INTO `major` VALUES ('3901', 'เทคโนโลยีสารสนเทศ', '9', 'Informa');
+INSERT INTO `major` VALUES ('4101', 'เทคโนโลยียานยนต์', '1', 'Automot');
+INSERT INTO `major` VALUES ('4102', 'เทคโนโลยีแม่พิมพ์', '1', 'Mold an');
+INSERT INTO `major` VALUES ('4104', 'เทคโนโลยีไฟฟ้า', '1', 'Electri');
+INSERT INTO `major` VALUES ('4105', 'เทคโนโลยีอิเล็กทรอนิกส์', '1', 'Electro');
+INSERT INTO `major` VALUES ('4106', 'เทคโนโลยีการก่อสร้าง', '1', 'Constru');
+INSERT INTO `major` VALUES ('4107', 'เทคโนโลยีอุตสาหกรรมเครื่องเรือนและตกแต่งภายใน', '1', 'Furnitu');
+INSERT INTO `major` VALUES ('4108', 'เทคโนโลยีสถาปัตยกรรม', '1', 'Archite');
+INSERT INTO `major` VALUES ('4122', 'เทคโนโลยียาง', '1', 'Rubber ');
+INSERT INTO `major` VALUES ('4132', 'เทคโนโลยีเครื่องกลเรือ', '1', 'Marine ');
+INSERT INTO `major` VALUES ('4201', 'การบัญชี', '2', 'Account');
+INSERT INTO `major` VALUES ('4202', 'การตลาด', '2', 'Marketi');
+INSERT INTO `major` VALUES ('4204', 'คอมพิวเตอร์ธุรกิจ', '2', 'Busines');
+INSERT INTO `major` VALUES ('4214', 'การจัดการโลจิสติกส์', '2', 'logisti');
+INSERT INTO `major` VALUES ('4216', 'การจัดการสำนักงาน', '2', 'Office ');
+INSERT INTO `major` VALUES ('4301', 'วิจิตรศิลป์', '3', 'Fine Ar');
+INSERT INTO `major` VALUES ('4302', 'การออกแบบผลิตภัณฑ์', '3', 'Product');
+INSERT INTO `major` VALUES ('4308', 'ดิจิตอลกราฟิก', '3', 'Digital');
+INSERT INTO `major` VALUES ('4311', 'ออกแบบรูปพรรณอัญมณีและเครื่องประดับ', '3', 'Metalwo');
+INSERT INTO `major` VALUES ('4315', 'ช่างทองหลวง', '3', 'Royal G');
+INSERT INTO `major` VALUES ('4403', 'เทคโนโลยีการออกแบบแฟชั่น', '4', 'Fashion');
+INSERT INTO `major` VALUES ('4404', 'เทคโนโลยีอาหารและโภชนาการ', '4', 'Food an');
+INSERT INTO `major` VALUES ('4406', 'การจัดการงานคหกรรม', '4', 'Home Ec');
+INSERT INTO `major` VALUES ('4502', 'เทคโนโลยีการผลิตพืช', '5', 'Plant P');
+INSERT INTO `major` VALUES ('4503', 'เทคโนโลยีการผลิตสัตว์', '5', 'Animal ');
+INSERT INTO `major` VALUES ('4601', 'เทคโนโลยีเพาะเลี้ยงสัตว์น้ำ', '6', 'Aquacul');
+INSERT INTO `major` VALUES ('4602', 'เทคโนโลยีแปรรูปสัตว์น้ำ', '6', 'Fish Pr');
+INSERT INTO `major` VALUES ('4701', 'การโรงแรม', '7', 'Hotel a');
+INSERT INTO `major` VALUES ('4702', 'การท่องเที่ยว', '7', 'Tourism');
+INSERT INTO `major` VALUES ('4901', 'เทคโนโลยีสารสนเทศ', '9', 'Informa');
+INSERT INTO `major` VALUES ('5101', 'เครื่องกล', '1', 'Mechani');
+INSERT INTO `major` VALUES ('5103', 'เทคนิคการผลิต', '1', 'Welding');
+INSERT INTO `major` VALUES ('5104', 'ไฟฟ้า', '1', 'Electri');
+INSERT INTO `major` VALUES ('5105', 'ไฟฟ้า', '1', 'Electri');
+INSERT INTO `major` VALUES ('5106', 'โยธา', '1', 'Civil');
+INSERT INTO `major` VALUES ('5202', 'คอมพิวเตอร์ธุรกิจ', '2', 'Busines');
+INSERT INTO `major` VALUES ('3133', 'ช่างเทคนิคระบบขนส่งทางราง', '1', '');
+INSERT INTO `major` VALUES ('1011', 'สามัญสัมพันธ์', '', '');
+INSERT INTO `major` VALUES ('1021', 'เทคโนโลยีพื้นฐาน', '', '');
 
 -- ----------------------------
 -- Table structure for `minor`
@@ -413,13 +626,333 @@ DROP TABLE IF EXISTS `minor`;
 CREATE TABLE `minor` (
   `minor_id` varchar(7) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสสาขางาน',
   `minor_name` varchar(50) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ชื่อสาขางาน',
-  `minor_eng` varchar(100) COLLATE utf8_thai_520_w2 DEFAULT NULL COMMENT 'ชื่อสาขางานภาษาอังกฤษ',
+  `major_code` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL,
+  `minor_eng` varchar(100) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ชื่อสาขางานภาษาอังกฤษ',
   PRIMARY KEY (`minor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
 
 -- ----------------------------
 -- Records of minor
 -- ----------------------------
+INSERT INTO `minor` VALUES ('210101', 'ยานยนต์', '2101', 'Automotive');
+INSERT INTO `minor` VALUES ('210102', 'เครื่องกลอุตสาหกรรม', '2101', 'Industrial Machinery');
+INSERT INTO `minor` VALUES ('210103', 'เครื่องกลเรือ', '2101', 'Ship Mechanics');
+INSERT INTO `minor` VALUES ('210104', 'เครื่องกลเกษตร', '2101', 'Agricultural Machinery');
+INSERT INTO `minor` VALUES ('210105', 'ตัวถังและสีรถยนต์', '2101', 'Auto body repair and repaint');
+INSERT INTO `minor` VALUES ('210201', 'เครื่องมือกล', '2102', 'Machine Tools');
+INSERT INTO `minor` VALUES ('210202', 'แม่พิมพ์โลหะ', '2102', 'Metal Mold-making');
+INSERT INTO `minor` VALUES ('210203', 'แม่พิมพ์พลาสติก', '2102', 'Plastic Mold-making');
+INSERT INTO `minor` VALUES ('210204', 'ผลิตชิ้นส่วนยานยนต์', '2102', '');
+INSERT INTO `minor` VALUES ('210301', 'ผลิตภัณฑ์', '2103', '');
+INSERT INTO `minor` VALUES ('210302', 'โครงสร้าง', '2103', '');
+INSERT INTO `minor` VALUES ('210303', 'อุตสาหกรรมต่อตัวถังรถโดยสาร', '2103', 'Bus Body Assambly Industrial');
+INSERT INTO `minor` VALUES ('210401', 'ไฟฟ้ากำลัง', '2104', 'Electrical Power');
+INSERT INTO `minor` VALUES ('210501', 'อิเล็กทรอนิกส์', '2105', 'Electronics');
+INSERT INTO `minor` VALUES ('210601', 'ก่อสร้าง', '2106', 'Building Construction');
+INSERT INTO `minor` VALUES ('210701', 'เครื่องเรือนและตกแต่งภายใน', '2107', 'Furniture and Interior Decoration');
+INSERT INTO `minor` VALUES ('210801', 'สถาปัตยกรรม', '2108', 'Architectural');
+INSERT INTO `minor` VALUES ('210901', 'สำรวจ', '2109', 'Surveying');
+INSERT INTO `minor` VALUES ('211001', 'เขียนแบบเครื่องกล', '2110', 'Mechanical Drafting');
+INSERT INTO `minor` VALUES ('211101', 'ซ่อมบำรุงอุตสาหกรรม', '2111', 'Machine Tools Maintenance');
+INSERT INTO `minor` VALUES ('211201', 'ช่างพิมพ์', '2112', 'Printing');
+INSERT INTO `minor` VALUES ('211601', 'แว่นตาและเลนส์', '2116', 'Optical and Lens');
+INSERT INTO `minor` VALUES ('211701', 'ต่อเรือโลหะ', '2117', 'Metal Ship');
+INSERT INTO `minor` VALUES ('211702', 'ต่อเรือไม้และไฟเบอร์กลาส', '2117', 'Wooden Boat and Fiberglass Boat');
+INSERT INTO `minor` VALUES ('211704', 'นาวาสถาปัตย์', '2117', 'Naval Architecture');
+INSERT INTO `minor` VALUES ('211705', 'ซ่อมบำรุงเรือ', '2117', '');
+INSERT INTO `minor` VALUES ('211901', 'โทรคมนาคม', '2119', 'Telecommunication');
+INSERT INTO `minor` VALUES ('212101', 'โยธา', '2121', 'Civil');
+INSERT INTO `minor` VALUES ('212201', 'อุตสาหกรรมยาง', '2122', '');
+INSERT INTO `minor` VALUES ('212701', 'เมคคาทรอนิกส์', '2127', 'Mechatronics');
+INSERT INTO `minor` VALUES ('212801', 'เทคนิคคอมพิวเตอร์', '2128', '');
+INSERT INTO `minor` VALUES ('212901', 'อุตสาหกรรมฟอกหนัง', '2129', '');
+INSERT INTO `minor` VALUES ('219101', 'กลุ่มวิชายานยนต์', '2191', 'Automotive group');
+INSERT INTO `minor` VALUES ('219102', 'กลุ่มวิชาเครื่องมือกล', '2191', 'Machine Tools');
+INSERT INTO `minor` VALUES ('219103', 'กลุ่มวิชาไฟฟ้า', '2191', 'Electrical');
+INSERT INTO `minor` VALUES ('219104', 'กลุ่มวิชาอิเล็กทรอนิกส์', '2191', 'Electronics');
+INSERT INTO `minor` VALUES ('219105', 'กลุ่มวิชาเครื่องจักรอัตโนมัติ', '2191', 'Auto Machine');
+INSERT INTO `minor` VALUES ('219106', 'กลุ่มวิชาก่อสร้าง', '2191', '');
+INSERT INTO `minor` VALUES ('220101', 'การบัญชี', '2201', 'Accounting');
+INSERT INTO `minor` VALUES ('220201', 'การตลาด', '2202', 'Marketing');
+INSERT INTO `minor` VALUES ('220301', 'การเลขานุการ', '2203', 'Secretarial Studies');
+INSERT INTO `minor` VALUES ('220401', 'คอมพิวเตอร์ธุรกิจ', '2204', 'Business Computer');
+INSERT INTO `minor` VALUES ('220901', 'ธุรกิจสถานพยาบาล', '2209', 'Health Sector Business');
+INSERT INTO `minor` VALUES ('221001', 'การประชาสัมพันธ์', '2210', 'Public Relations');
+INSERT INTO `minor` VALUES ('221101', 'ธุรกิจค้าปลีกทั่วไป', '2211', 'Retail Business');
+INSERT INTO `minor` VALUES ('221102', 'ธุรกิจค้าปลีกร้านสะดวกซื้อ', '2211', '');
+INSERT INTO `minor` VALUES ('221103', 'ธุรกิจค้าปลีกสรรพสินค้า', '2211', '');
+INSERT INTO `minor` VALUES ('221104', 'ธุรกิจค้าปลีกซุปเปอร์เซ็นเตอร์', '2211', '');
+INSERT INTO `minor` VALUES ('221105', 'ธุรกิจค้าปลีกซุปเปอร์มาร์เก็ต', '2211', '');
+INSERT INTO `minor` VALUES ('221106', 'ธุรกิจค้าปลีกสินค้าเฉพาะอย่าง', '2211', '');
+INSERT INTO `minor` VALUES ('221107', 'ธุรกิจค้าปลีกร้านอาหารและภัตตาคาร', '2211', '');
+INSERT INTO `minor` VALUES ('221201', 'ภาษาต่างประเทศ', '2212', 'Foreign Languages');
+INSERT INTO `minor` VALUES ('221901', 'การจัดการด้านความปลอดภัย', '2219', '');
+INSERT INTO `minor` VALUES ('229101', 'กลุ่มวิชาเทคโนโลยีการท่องเที่ยว', '2291', '');
+INSERT INTO `minor` VALUES ('230101', 'วิจิตรศิลป์', '2301', 'Fine Art');
+INSERT INTO `minor` VALUES ('230201', 'การออกแบบ', '2302', 'Design');
+INSERT INTO `minor` VALUES ('230301', 'ศิลปหัตถกรรม', '2303', 'Arts and Crafts');
+INSERT INTO `minor` VALUES ('230401', 'ศิลปกรรมเซรามิก', '2304', 'Ceramics');
+INSERT INTO `minor` VALUES ('230501', 'ศิลปหัตถกรรมรูปพรรณและเครื่องประดับ', '2305', 'Metalware and Jewelry');
+INSERT INTO `minor` VALUES ('230601', 'การถ่ายภาพและวีดีทัศน์', '2306', 'Photography and Video Technology');
+INSERT INTO `minor` VALUES ('230701', 'เทคโนโลยีศิลปกรรม', '2307', 'Art Technology');
+INSERT INTO `minor` VALUES ('230801', 'คอมพิวเตอร์กราฟิกอาร์ต', '2308', 'Computer Graphics Art');
+INSERT INTO `minor` VALUES ('230802', 'มัลติมีเดีย', '2308', 'Multimedia');
+INSERT INTO `minor` VALUES ('230803', 'แอนิเมชั่น', '2308', 'Animation');
+INSERT INTO `minor` VALUES ('230901', 'ผลิตภัณฑ์เครื่องหนัง', '2309', 'Leather Industry');
+INSERT INTO `minor` VALUES ('231001', 'เครื่องประดับอัญมณี', '2310', 'Jewelry Ornaments');
+INSERT INTO `minor` VALUES ('231002', 'การเจียระไนอัญมณี', '2310', '');
+INSERT INTO `minor` VALUES ('231501', 'ช่างทองหลวง', '2315', '');
+INSERT INTO `minor` VALUES ('231502', 'เครื่องประดับอัญมณี', '2315', '');
+INSERT INTO `minor` VALUES ('231701', 'ดนตรี', '2317', 'International Music');
+INSERT INTO `minor` VALUES ('231702', 'ดนตรีประกอบสื่อและการแสดง', '2317', '');
+INSERT INTO `minor` VALUES ('231801', 'การพิมพ์สกรีน', '2318', '');
+INSERT INTO `minor` VALUES ('231901', 'ออกแบบนิเทศศิลป์', '2319', '');
+INSERT INTO `minor` VALUES ('240101', 'แฟชั่นดีไซน์', '2401', 'Fasion Design');
+INSERT INTO `minor` VALUES ('240102', 'เสื้อผ้าแฟชั่น', '2401', 'Clothing Design');
+INSERT INTO `minor` VALUES ('240103', 'อุตสาหกรรมเสื้อผ้า', '2401', 'Clothing Industry');
+INSERT INTO `minor` VALUES ('240104', 'ธุรกิจแฟชั่น', '2401', 'Clothes Business');
+INSERT INTO `minor` VALUES ('240201', 'อาหารและโภชนาการ', '2402', 'Food and Nutrition');
+INSERT INTO `minor` VALUES ('240202', 'แปรรูปอาหาร', '2402', 'Food Processing');
+INSERT INTO `minor` VALUES ('240203', 'ธุรกิจอาหาร', '2402', 'Food Business');
+INSERT INTO `minor` VALUES ('240301', 'คหกรรมการผลิต', '2403', 'Home Economics Productivity');
+INSERT INTO `minor` VALUES ('240302', 'คหกรรมการบริการ', '2403', 'Home Economics Services');
+INSERT INTO `minor` VALUES ('240303', 'ธุรกิจคหกรรม', '2403', 'Home Economics Business');
+INSERT INTO `minor` VALUES ('240401', 'อาหารและโภชนาการ', '2404', 'Food and Nutrition');
+INSERT INTO `minor` VALUES ('240402', 'แปรรูปอาหาร', '2404', '');
+INSERT INTO `minor` VALUES ('240403', 'ธุรกิจอาหาร', '2404', '');
+INSERT INTO `minor` VALUES ('240601', 'ธุรกิจดอกไม้และงานประดิษฐ์', '2406', '');
+INSERT INTO `minor` VALUES ('240602', 'เด็กปฐมวัย', '2406', '');
+INSERT INTO `minor` VALUES ('240603', 'คหกรรมเพื่อการโรงแรม', '2406', '');
+INSERT INTO `minor` VALUES ('240701', 'เสริมสวย', '2407', 'Beauty');
+INSERT INTO `minor` VALUES ('240801', 'แฟชั่นดีไซน์', '2408', '');
+INSERT INTO `minor` VALUES ('240802', 'อาหารและโภชนาการ', '2408', '');
+INSERT INTO `minor` VALUES ('240803', 'ดอกไม้และงานประดิษฐ์', '2408', '');
+INSERT INTO `minor` VALUES ('240804', 'เสริมสวย', '2408', '');
+INSERT INTO `minor` VALUES ('249101', 'กลุ่มวิชางานแปรรูปอาหาร', '2491', '');
+INSERT INTO `minor` VALUES ('250101', 'การเกษตร', '2501', '');
+INSERT INTO `minor` VALUES ('250102', 'พืชศาสตร์', '2501', 'Plant Science');
+INSERT INTO `minor` VALUES ('250103', 'สัตวศาสตร์', '2501', 'Animal Science');
+INSERT INTO `minor` VALUES ('250104', 'ช่างเกษตร', '2501', 'Farm Mechanics');
+INSERT INTO `minor` VALUES ('250105', 'อุตสาหกรรมเกษตร', '2501', 'Agro- Industrial');
+INSERT INTO `minor` VALUES ('250106', 'ผลิตสัตว์น้ำ', '2501', '');
+INSERT INTO `minor` VALUES ('259101', 'กลุ่มวิชาเทคโนโลยีชีวภาพเกษตร', '2591', 'Aqriculture Biotechnology');
+INSERT INTO `minor` VALUES ('259102', 'กลุ่มวิชาพืชศาสตร์', '2591', 'Plant Science');
+INSERT INTO `minor` VALUES ('259103', 'กลุ่มวิชาสัตวศาสตร์', '2591', 'Animal Science');
+INSERT INTO `minor` VALUES ('259104', 'กลุ่มวิชาอุตสาหกรรมเกษตร', '2491', 'Agro-Industrial');
+INSERT INTO `minor` VALUES ('259105', 'กลุ่มวิชาช่างเกษตร', '2591', 'Farm Mechanics');
+INSERT INTO `minor` VALUES ('260101', 'เพาะเลี้ยงสัตว์น้ำ', '2601', '');
+INSERT INTO `minor` VALUES ('260201', 'แปรรูปสัตว์น้ำ', '2602', '');
+INSERT INTO `minor` VALUES ('260202', 'ผลิตภัณฑ์สัตว์น้ำแช่เยือกแข็ง', '2602', '');
+INSERT INTO `minor` VALUES ('260203', 'ซูริมิและผลิตภัณฑ์', '2602', 'Surimi Processing and Product');
+INSERT INTO `minor` VALUES ('260204', 'ผลิตภัณฑ์สัตว์น้ำบรรจุกระป๋อง', '2602', '');
+INSERT INTO `minor` VALUES ('260301', 'ประมงทะเล', '2603', 'Marine Fisheries');
+INSERT INTO `minor` VALUES ('270101', 'การโรงแรม', '2701', 'Hospitality');
+INSERT INTO `minor` VALUES ('270201', 'การท่องเที่ยว', '2702', 'Tourism');
+INSERT INTO `minor` VALUES ('280101', 'เทคโนโลยีสิ่งทอ', '2801', 'Textile TechnoLogy');
+INSERT INTO `minor` VALUES ('280201', 'เคมีสิ่งทอ', '2802', 'Textile Chemistry');
+INSERT INTO `minor` VALUES ('280301', 'เทคโนโลยีเครื่องนุ่งห่ม', '2803', 'Garment Industry');
+INSERT INTO `minor` VALUES ('290101', 'เทคโนโลยีสารสนเทศ', '2901', 'Information Technology');
+INSERT INTO `minor` VALUES ('310101', 'เทคนิคยานยนต์', '3101', 'Automotive Techniques');
+INSERT INTO `minor` VALUES ('310102', 'เทคนิคเครื่องกลอุตสาหกรรม', '3101', 'Industrial Machinery');
+INSERT INTO `minor` VALUES ('310103', 'เทคนิคเครื่องกลเรือ', '3101', 'Ship Mechanics');
+INSERT INTO `minor` VALUES ('310104', 'เทคนิคเครื่องกลเกษตร', '3101', 'Agricultural Machinery');
+INSERT INTO `minor` VALUES ('310105', 'เทคนิคเครื่องกลเรือพาณิชย์', '3101', 'Ocean Vessel Mechanics');
+INSERT INTO `minor` VALUES ('310106', 'เทคนิคซ่อมตัวถังและสีรถยนต์', '3101', 'Auto body repair and repaint');
+INSERT INTO `minor` VALUES ('310107', 'บำรุงรักษาเครื่องกลอุตสาหกรรมผลิตไฟฟ้า', '3101', 'Power Genertor Mechnical Maintenance');
+INSERT INTO `minor` VALUES ('310108', 'เทคนิคเครื่องกลระบบขนส่งทางราง', '3101', '');
+INSERT INTO `minor` VALUES ('310201', 'เครื่องมือกล', '3102', 'Machine Tool');
+INSERT INTO `minor` VALUES ('310202', 'แม่พิมพ์โลหะ', '3102', 'Die-making');
+INSERT INTO `minor` VALUES ('310203', 'แม่พิมพ์พลาสติก', '3102', 'Mold-making');
+INSERT INTO `minor` VALUES ('310204', 'ผลิตชิ้นส่วนยานยนต์', '3102', '');
+INSERT INTO `minor` VALUES ('310301', 'ตรวจสอบและทดสอบงานเชื่อม', '3103', '');
+INSERT INTO `minor` VALUES ('310302', 'เทคโนโลยีงานเชื่อมและขึ้นรูปผลิตภัณฑ์โลหะ', '3103', '');
+INSERT INTO `minor` VALUES ('310303', 'เทคโนโลยีงานเชื่อมโครงสร้างโลหะ', '3103', '');
+INSERT INTO `minor` VALUES ('310304', 'เทคโนโลยีงานเชื่อมท่อและถังความดัน', '3103', '');
+INSERT INTO `minor` VALUES ('310401', 'ไฟฟ้าควบคุม', '3104', '');
+INSERT INTO `minor` VALUES ('310402', 'ไฟฟ้ากำลัง', '3104', 'Electrical Power');
+INSERT INTO `minor` VALUES ('310403', 'เครื่องทำความเย็นและปรับอากาศ', '3104', 'Refrigeration and Air-condition');
+INSERT INTO `minor` VALUES ('310404', 'เครื่องมือวัดอุตสาหกรรม', '3104', 'Industrial Instruments');
+INSERT INTO `minor` VALUES ('310405', 'บำรุงรักษาระบบจำหน่ายและอุปกรณ์ไฟฟ้า', '3104', 'Electric Distribution System and Devices Maintenance');
+INSERT INTO `minor` VALUES ('310406', 'เทคนิคในอาคารขนาดใหญ่', '3104', 'Building System');
+INSERT INTO `minor` VALUES ('310407', 'บำรุงรักษาระบบไฟฟ้าในระบบขนส่งทางราง', '3104', '');
+INSERT INTO `minor` VALUES ('310408', 'เทคโนโลยีระบบส่งไฟฟ้า', '3104', '');
+INSERT INTO `minor` VALUES ('310501', 'อิเล็กทรอนิกส์อุตสาหกรรม', '3105', 'Industrial Electronics');
+INSERT INTO `minor` VALUES ('310502', 'ระบบภาพและระบบเสียง', '3105', 'Audio and Video Systems');
+INSERT INTO `minor` VALUES ('310503', 'อิเล็กทรอนิกส์การแพทย์', '3105', '');
+INSERT INTO `minor` VALUES ('310601', 'ก่อสร้าง', '3106', 'Building Construction');
+INSERT INTO `minor` VALUES ('310701', 'อุตสาหกรรมเครื่องเรือน', '3107', 'Furniture Production');
+INSERT INTO `minor` VALUES ('310702', 'ออกแบบตกแต่งภายใน', '3107', 'Interior Designing');
+INSERT INTO `minor` VALUES ('310703', 'ตกแต่งภายใน', '3107', 'Interior Decoration');
+INSERT INTO `minor` VALUES ('310801', 'เทคนิคสถาปัตยกรรม', '3108', 'Architectural');
+INSERT INTO `minor` VALUES ('310901', 'สำรวจ', '3109', 'Surveying');
+INSERT INTO `minor` VALUES ('311001', 'เขียนแบบเครื่องกล', '3110', 'Mechanical Drafting');
+INSERT INTO `minor` VALUES ('311101', 'ติดตั้งและบำรุงรักษา', '3111', '');
+INSERT INTO `minor` VALUES ('311102', 'อุตสาหกรรมการผลิต', '3111', '');
+INSERT INTO `minor` VALUES ('311201', 'การพิมพ์', '3112', '');
+INSERT INTO `minor` VALUES ('311301', 'เทคนิคการควบคุมการผลิตพลังงาน', '3113', '');
+INSERT INTO `minor` VALUES ('311302', 'เทคนิคการซ่อมบำรุงอุตสาหกรรมพลังงาน', '3113', '');
+INSERT INTO `minor` VALUES ('311303', 'เทคนิคการจัดการพลังงาน', '3113', '');
+INSERT INTO `minor` VALUES ('311501', 'เทคนิคกายอุปกรณ์', '3115', '');
+INSERT INTO `minor` VALUES ('311601', 'เทคนิคแว่นตาและเลนส์', '3116', '');
+INSERT INTO `minor` VALUES ('311701', 'เทคโนโลยีการต่อเรือ', '3117', '');
+INSERT INTO `minor` VALUES ('311901', 'เทคโนโลยีระบบโทรคมนาคม', '3119', '');
+INSERT INTO `minor` VALUES ('311902', 'เทคโนโลยีระบบเครือข่ายสายตอนนอก', '3119', '');
+INSERT INTO `minor` VALUES ('311903', 'เทคโนโลยีระบบสื่อสารข้อมูลและเครือข่าย', '3119', '');
+INSERT INTO `minor` VALUES ('311904', 'เทคโนโลยีระบบสื่อสารวิทยุ', '3119', '');
+INSERT INTO `minor` VALUES ('312001', 'เทคโนโลยีการวัดและควบคุม', '3120', '');
+INSERT INTO `minor` VALUES ('312101', 'โยธา', '3121', '');
+INSERT INTO `minor` VALUES ('312201', 'เทคโนโลยียาง', '3122', 'Rubber Technology');
+INSERT INTO `minor` VALUES ('312301', 'เคมีอุตสาหกรรม', '3123', '');
+INSERT INTO `minor` VALUES ('312401', 'ปิโตรเคมี', '3124', '');
+INSERT INTO `minor` VALUES ('312601', 'ช่างอากาศยาน', '3126', '');
+INSERT INTO `minor` VALUES ('312701', 'เมคคาทรอนิกส์และหุ่นยนต์', '3127', '');
+INSERT INTO `minor` VALUES ('312801', 'คอมพิวเตอร์ฮาร์ดแวร์', '3128', 'Computer Technology');
+INSERT INTO `minor` VALUES ('312802', 'คอมพิวเตอร์ซอฟแวร์', '3128', '');
+INSERT INTO `minor` VALUES ('312803', 'คอมพิวเตอร์ระบบเครือข่าย', '3128', '');
+INSERT INTO `minor` VALUES ('312804', 'คอมพิวเตอร์มัลติมีเดีย', '3128', '');
+INSERT INTO `minor` VALUES ('313201', 'เทคโนโลยีหลุมเจาะปิโตรเลียม', '3132', 'Oil well Technology');
+INSERT INTO `minor` VALUES ('313202', 'เทคโนโลยีปิโตรเลียม', '3132', 'Petroleum Technology');
+INSERT INTO `minor` VALUES ('320101', 'การบัญชี', '3201', 'Accounting');
+INSERT INTO `minor` VALUES ('320201', 'การตลาด', '3202', 'Marketing');
+INSERT INTO `minor` VALUES ('320202', 'ธุรกิจการบริการยานยนต์', '3202', 'Automotive Service Business');
+INSERT INTO `minor` VALUES ('320301', 'การเลขานุการ', '3203', 'Secretarial');
+INSERT INTO `minor` VALUES ('320401', 'คอมพิวเตอร์ธุรกิจ', '3204', 'Business Computer');
+INSERT INTO `minor` VALUES ('320501', 'การเงินการธนาคาร', '3205', '');
+INSERT INTO `minor` VALUES ('320601', 'ธุรกิจการค้าระหว่างประเทศ', '3206', '');
+INSERT INTO `minor` VALUES ('320701', 'การจัดการทรัพยากรมนุษย์', '3207', '');
+INSERT INTO `minor` VALUES ('320901', 'ธุรกิจสถานพยาบาล', '3209', '');
+INSERT INTO `minor` VALUES ('321101', 'ธุรกิจค้าปลีกทั่วไป', '3211', 'General Retail Business');
+INSERT INTO `minor` VALUES ('321102', 'ธุรกิจค้าปลีกร้านสะดวกซื้อ', '3211', 'Convenience Store');
+INSERT INTO `minor` VALUES ('321103', 'ธุรกิจค้าปลีกสรรพสินค้า', '3211', 'Department Store Business');
+INSERT INTO `minor` VALUES ('321104', 'ธุรกิจค้าปลีกซุปเปอร์เซ็นเตอร์', '3211', 'Supercenter Business');
+INSERT INTO `minor` VALUES ('321105', 'ธุรกิจค้าปลีกซุปเปอร์มาร์เก็ต', '3211', 'Supermarket Business');
+INSERT INTO `minor` VALUES ('321106', 'ธุรกิจค้าปลีกสินค้าเฉพาะอย่าง', '3211', 'Specialty Store Business');
+INSERT INTO `minor` VALUES ('321107', 'ธุรกิจการบริการ', '3211', 'Service Business');
+INSERT INTO `minor` VALUES ('321108', 'ธุรกิจค้าปลีกร้านอาหารและภัตตาคาร', '3211', 'Restaurant Business');
+INSERT INTO `minor` VALUES ('321201', 'ภาษาต่างประเทศธุรกิจ', '3212', '');
+INSERT INTO `minor` VALUES ('321401', 'การจัดการโลจิสติกส์', '3214', 'Logistic Management');
+INSERT INTO `minor` VALUES ('321402', 'การจัดการการขนส่ง', '3214', 'Ware House');
+INSERT INTO `minor` VALUES ('321403', 'การจัดการคลังสินค้า', '3214', 'Customs Broker');
+INSERT INTO `minor` VALUES ('321404', 'ตัวแทนออกของ', '3214', 'Transportation');
+INSERT INTO `minor` VALUES ('321501', 'การจัดการทั่วไป', '3215', '');
+INSERT INTO `minor` VALUES ('321601', 'การจัดการสำนักงาน', '3216', 'Office Management');
+INSERT INTO `minor` VALUES ('330101', 'วิจิตรศิลป์', '3301', 'Fine Art');
+INSERT INTO `minor` VALUES ('330201', 'การออกแบบนิเทศศิลป์', '3302', '');
+INSERT INTO `minor` VALUES ('330202', 'การออกแบบผลิตภัณฑ์', '3302', 'Product Design');
+INSERT INTO `minor` VALUES ('330203', 'การออกแบบตกแต่งภายใน', '3302', 'Interior Design');
+INSERT INTO `minor` VALUES ('330204', 'การออกแบบเครื่องแต่งกาย', '3302', 'Costume Art Design');
+INSERT INTO `minor` VALUES ('330301', 'เทคนิคงานดิน', '3303', 'Clay');
+INSERT INTO `minor` VALUES ('330302', 'เทคนิคงานหนัง', '3302', 'Leather');
+INSERT INTO `minor` VALUES ('330303', 'เทคนิคงานหล่อ', '3303', 'Casting');
+INSERT INTO `minor` VALUES ('330304', 'เทคนิคงานพิมพ์ย้อม', '3303', 'Printing & Dyeing');
+INSERT INTO `minor` VALUES ('330305', 'เทคนิคงานไม้', '3303', 'Wood');
+INSERT INTO `minor` VALUES ('330306', 'เทคนิคงานโลหะ', '3303', 'Metal');
+INSERT INTO `minor` VALUES ('330307', 'เทคนิคงานรัก', '3303', 'Gilding and Lacquerware');
+INSERT INTO `minor` VALUES ('330308', 'เทคนิคงานจักสาน', '3303', 'Weaving');
+INSERT INTO `minor` VALUES ('330401', 'เทคโนโลยีเซรามิก', '3304', 'Ceramics technology');
+INSERT INTO `minor` VALUES ('330501', 'ศิลปหัตถกรรมรูปพรรณและเครื่องประดับ', '3305', 'Metalware and Ornaments');
+INSERT INTO `minor` VALUES ('330601', 'การถ่ายภาพและมัลติมีเดีย', '3306', 'Photography and Multimedia');
+INSERT INTO `minor` VALUES ('330602', 'ศิลปะการถ่ายภาพ', '3306', 'Art of Photography');
+INSERT INTO `minor` VALUES ('330701', 'เทคโนโลยีศิลปกรรม', '3307', 'Art Technology');
+INSERT INTO `minor` VALUES ('330801', 'คอมพิวเตอร์กราฟิกอาร์ต', '3308', 'Computer Graphics');
+INSERT INTO `minor` VALUES ('330802', 'มัลติมีเดีย', '3308', 'Multimedia');
+INSERT INTO `minor` VALUES ('330803', 'แอนิเมชั่น', '3308', 'Animation');
+INSERT INTO `minor` VALUES ('330804', 'สื่อสิ่งพิมพ์', '3308', '');
+INSERT INTO `minor` VALUES ('330901', 'เทคโนโลยีผลิตภัณฑ์อุตสาหกรรมเครื่องหนัง', '3309', 'Leather Design Indutry Product Technology');
+INSERT INTO `minor` VALUES ('331001', 'เครื่องประดับอัญมณี', '3310', 'Jeweled');
+INSERT INTO `minor` VALUES ('331101', 'ออกแบบเครื่องประดับอัญมณี', '3311', 'Jewelry Design');
+INSERT INTO `minor` VALUES ('331501', 'ช่างทองหลวง', '3315', 'Royal Goldsmith');
+INSERT INTO `minor` VALUES ('331502', 'เครื่องประดับอัญมณี', '3315', 'Jeweled');
+INSERT INTO `minor` VALUES ('331503', 'ออกแบบเครื่องประดับอัญมณี', '3315', 'Jewelry Design');
+INSERT INTO `minor` VALUES ('331504', 'วิเคาระห์และควบคุมคุณภาพอัญมณีและเครื่องประดับ', '3315', '');
+INSERT INTO `minor` VALUES ('331505', 'เทคนิคการทำต้นแบบและการหล่อเครื่องประดับอัญมณี', '3315', '');
+INSERT INTO `minor` VALUES ('331506', 'การจัการธุรกิจเครื่องประดับและอัญมณี', '3315', '');
+INSERT INTO `minor` VALUES ('331701', 'ดนตรีและเทคโนโลยี', '3317', '');
+INSERT INTO `minor` VALUES ('331801', 'การพิมพ์สกรีน', '3318', '');
+INSERT INTO `minor` VALUES ('331901', 'ออกแบบนิเทศน์ศิลป์', '3319', '');
+INSERT INTO `minor` VALUES ('340101', 'เทคโนโลยีแฟชั่นและสิ่งทอ', '3401', '');
+INSERT INTO `minor` VALUES ('340201', 'เทคโนโลยีออกแบบแฟชั่นและสิ่งทอ', '3402', '');
+INSERT INTO `minor` VALUES ('340301', 'เทคโนโลยีสิ่งทอและเครื่องนุ่งห่ม', '3403', '');
+INSERT INTO `minor` VALUES ('340401', 'อาหารและโภชนาการ', '3404', '');
+INSERT INTO `minor` VALUES ('340402', 'การแปรรูปอาหาร', '3404', '');
+INSERT INTO `minor` VALUES ('340403', 'การประกอบอาหารในเรือเดินทะเลระหว่างประเทศ', '3404', '');
+INSERT INTO `minor` VALUES ('340501', 'อุตสาหกรมมอาหาร', '3405', '');
+INSERT INTO `minor` VALUES ('340601', 'การจัดงานดอกไม้และงานประดิษฐ์', '3406', '');
+INSERT INTO `minor` VALUES ('340602', 'การดูแลเด็กและผู้สูงอายุ', '3406', '');
+INSERT INTO `minor` VALUES ('340603', 'การจัดการคหกรรมเพื่อการโรงแรม', '3406', '');
+INSERT INTO `minor` VALUES ('340701', 'เทคโนโลยีความงาม', '3407', '');
+INSERT INTO `minor` VALUES ('350101', 'เกษตรศาสตร์', '3501', 'Agricultural Science');
+INSERT INTO `minor` VALUES ('350201', 'พืชไร่', '3502', 'Field Crops');
+INSERT INTO `minor` VALUES ('350202', 'พืชสวน', '3502', 'Horticultural Crops');
+INSERT INTO `minor` VALUES ('350203', 'เทคโนโลยีกล้วยไม้', '3502', 'Orchids Technology');
+INSERT INTO `minor` VALUES ('350301', 'การผลิตสัตว์', '3503', 'Animal Science');
+INSERT INTO `minor` VALUES ('350401', 'สัควรักษ์', '3504', 'Animal Health');
+INSERT INTO `minor` VALUES ('350501', 'เครื่องจักรกลเกษตร', '3505', 'Farm Mechanics');
+INSERT INTO `minor` VALUES ('350502', 'เครื่องจักรกลโรงสีข้าว', '3505', 'Rice Mill Mechanics');
+INSERT INTO `minor` VALUES ('350601', 'อุตสาหกรรมเกษตร', '3506', 'Agro-Industrial');
+INSERT INTO `minor` VALUES ('350701', 'เทคโนโลยีข้าว', '3507', 'Landscape');
+INSERT INTO `minor` VALUES ('350702', 'เทคโนโลยีอ้อย', '3507', '');
+INSERT INTO `minor` VALUES ('350703', 'เทคโนโลยีมันสำปะหลัง', '3507', '');
+INSERT INTO `minor` VALUES ('350704', 'เทคโนโลยียางพารา', '3507', '');
+INSERT INTO `minor` VALUES ('350705', 'เทคโนโลยีปาล์มน้ำมัน', '3507', '');
+INSERT INTO `minor` VALUES ('350706', 'เทคโนโลยีไม้ผล', '3507', '');
+INSERT INTO `minor` VALUES ('350801', 'เทคโนโลยีภูมิทัศน์', '3508', 'Rice Technology');
+INSERT INTO `minor` VALUES ('350901', 'ธุรกิจเกษตร', '3509', '');
+INSERT INTO `minor` VALUES ('350902', 'สหกรณ์', '3509', '');
+INSERT INTO `minor` VALUES ('360101', 'เพาะเลี้ยงสัตว์น้ำ', '3601', '');
+INSERT INTO `minor` VALUES ('360201', 'แปรรูปสัตว์น้ำ', '3602', '');
+INSERT INTO `minor` VALUES ('360202', 'อุตสาหกรรมสัตว์น้ำ', '3602', '');
+INSERT INTO `minor` VALUES ('370101', 'บริการส่วนหน้าโรงแรม', '3701', 'Hotel Front Office Service');
+INSERT INTO `minor` VALUES ('370102', 'แม่บ้านโรงแรม', '3701', 'Housekeeping');
+INSERT INTO `minor` VALUES ('370103', 'บริการอาหารและเครื่องดื่ม', '3701', 'Food and Beverage Service');
+INSERT INTO `minor` VALUES ('370104', 'ครัวโรงแรม', '3701', 'Hotel Kitchen');
+INSERT INTO `minor` VALUES ('370105', 'ธุรกิจสนามกอล์ฟ', '3701', '');
+INSERT INTO `minor` VALUES ('370201', 'การท่องเที่ยว', '3702', 'Tourism Management');
+INSERT INTO `minor` VALUES ('370501', 'การจัดการธุรกิจท่องเที่ยวเชิงนิเวศ', '3705', '');
+INSERT INTO `minor` VALUES ('370701', 'การจัดประชุมและนิทรรศการ', '3707', '');
+INSERT INTO `minor` VALUES ('380101', 'เทคโนโลยีสิ่งทอ', '3801', '');
+INSERT INTO `minor` VALUES ('380201', 'เคมีสิ่งทอ', '3802', '');
+INSERT INTO `minor` VALUES ('380301', 'เทคโนโลยีเครื่องนุ่งห่ม', '3803', '');
+INSERT INTO `minor` VALUES ('380401', 'เทคโนโลยีการทอผ้าไหมและผ้าพื้นเมือง', '3804', '');
+INSERT INTO `minor` VALUES ('390101', 'เทคโนโลยีสารสนเทศ', '3901', 'Information Technology');
+INSERT INTO `minor` VALUES ('390301', 'วิศวกรรมคอมพิวเตอร์ซอฟแวร์', '3903', '');
+INSERT INTO `minor` VALUES ('390401', 'คอมพิวเตอร์ระบบสมองกลฝังตัว', '3904', '');
+INSERT INTO `minor` VALUES ('390501', 'คอมพิวเตอร์เกมและแอนิเมชั่น', '3905', '');
+INSERT INTO `minor` VALUES ('410101', 'เทคโนโลยียานยนต์', '4101', '');
+INSERT INTO `minor` VALUES ('410201', 'เทคโนโลยีแม่พิมพ์', '4102', '');
+INSERT INTO `minor` VALUES ('410401', 'เทคโนโลยีไฟฟ้า', '4104', '');
+INSERT INTO `minor` VALUES ('410501', 'เทคโนโลยีอิเล็กทรอนิกส์', '4105', 'Electronic Technology');
+INSERT INTO `minor` VALUES ('410601', 'เทคโนโลยีการก่อสร้าง', '4106', '');
+INSERT INTO `minor` VALUES ('410701', 'เทคโนโลยีอุตสาหกรรมเครื่องเรือนและตกแต่งภายใน', '4107', '');
+INSERT INTO `minor` VALUES ('410801', 'เทคโนโลยีสถาปัตยกรรม', '4108', '');
+INSERT INTO `minor` VALUES ('412201', 'เทคโนโลยียาง', '4122', '');
+INSERT INTO `minor` VALUES ('413201', 'เทคโนโลยีเครื่องกลเรือ', '4132', '');
+INSERT INTO `minor` VALUES ('420101', 'การบัญชี', '4201', '');
+INSERT INTO `minor` VALUES ('420201', 'การตลาด', '4202', 'Marketing');
+INSERT INTO `minor` VALUES ('420401', 'คอมพิวเตอร์ธุรกิจ', '4204', '');
+INSERT INTO `minor` VALUES ('421401', 'การจัดการโลจิสติกส์', '4214', '');
+INSERT INTO `minor` VALUES ('421601', 'การจัดการสำนักงาน', '4216', '');
+INSERT INTO `minor` VALUES ('430101', 'วิจิตรศิลป์', '4301', '');
+INSERT INTO `minor` VALUES ('430201', 'การออกแบบผลิตภัณฑ์', '4302', '');
+INSERT INTO `minor` VALUES ('430801', 'ดิจิตอลกราฟิก', '4308', '');
+INSERT INTO `minor` VALUES ('431101', 'ออกแบบรูปพรรณอัญมณีและเครื่องประดับ', '4311', '');
+INSERT INTO `minor` VALUES ('431501', 'ช่างทองหลวง', '4315', '');
+INSERT INTO `minor` VALUES ('440301', 'เทคโนโลยีการออกแบบแฟชั่น', '4403', '');
+INSERT INTO `minor` VALUES ('440401', 'เทคโนโลยีอาหารและโภชนาการ', '4404', '');
+INSERT INTO `minor` VALUES ('440601', 'การจัดงานคหกรรม', '4406', '');
+INSERT INTO `minor` VALUES ('450201', 'เทคโนโลยีการผลิตพืช', '4502', '');
+INSERT INTO `minor` VALUES ('450301', 'เทคโนโลยีการผลิตสัตว์', '4503', '');
+INSERT INTO `minor` VALUES ('460101', 'เทคโนโลยีเพาะเลี้ยงสัตว์น้ำ', '4601', 'Aquaculture  Technology');
+INSERT INTO `minor` VALUES ('460201', 'เทคโนโลยีแปรรูปอาหาร', '4602', '');
+INSERT INTO `minor` VALUES ('470101', 'การโรงแรม', '4701', '');
+INSERT INTO `minor` VALUES ('470201', 'การท่องเที่ยว', '4702', '');
+INSERT INTO `minor` VALUES ('490101', 'เทคโนโลยีสารสนเทศ', '4901', '');
+INSERT INTO `minor` VALUES ('510101', 'เทคนิคช่างยนต์', '5101', 'Auto mechanic');
+INSERT INTO `minor` VALUES ('510301', 'เชื่อมและประสาน', '5103', 'Welding and Fabrication');
+INSERT INTO `minor` VALUES ('510401', 'เทคนิคไฟฟ้ากำลัง', '5104', 'Electrical Power Technique');
+INSERT INTO `minor` VALUES ('510501', 'เทคนิคไฟฟ้าสื่อสาร', '5105', 'Communication Technique');
+INSERT INTO `minor` VALUES ('510601', 'เทคนิคโยธา', '5106', 'Civil Engineering');
+INSERT INTO `minor` VALUES ('520201', 'คอมพิวเตอร์ธุรกิจ', '5202', 'Business Computer');
 
 -- ----------------------------
 -- Table structure for `questionair`
@@ -475,7 +1008,7 @@ CREATE TABLE `student` (
   `std_phone` varchar(10) COLLATE utf8_thai_520_w2 DEFAULT NULL COMMENT 'หมายเลขโทรศัพท์นักเรียน',
   `std_Mail` varchar(50) COLLATE utf8_thai_520_w2 DEFAULT NULL COMMENT 'อีเมล์นักเรียน',
   `std_line` varchar(50) COLLATE utf8_thai_520_w2 DEFAULT NULL COMMENT 'ไลน์ไอดี',
-  `std_level` varchar(6) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ระดับชั้น',
+  `std_level` varchar(10) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ระดับชั้น',
   `subject_type` varchar(20) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ประเภทวิชา',
   `std_status` varchar(15) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'สถานะ normal, retile, drop',
   `parental_status` varchar(20) COLLATE utf8_thai_520_w2 DEFAULT NULL COMMENT 'สถานภาพผู้ปกครอง',
@@ -4576,16 +5109,24 @@ INSERT INTO `student` VALUES ('รหัสประจำตั', 'คำนำ
 -- ----------------------------
 DROP TABLE IF EXISTS `student_group`;
 CREATE TABLE `student_group` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(13) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสประจำตัวผู้ใช้งานระบบ',
   `group_id` varchar(11) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'รหัสกลุ่มเรียน',
   `group_code` varchar(2) COLLATE utf8_thai_520_w2 NOT NULL COMMENT 'ชื่อกลุ่มเรียน',
-  `co_advisor` tinyint(1) NOT NULL COMMENT 'การเป็นที่ปรึกษาร่วม/ yes/no'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
+  `co_advisor` tinyint(1) NOT NULL COMMENT 'การเป็นที่ปรึกษาร่วม/ yes/no',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_thai_520_w2;
 
 -- ----------------------------
 -- Records of student_group
 -- ----------------------------
-INSERT INTO `student_group` VALUES ('7071005', '632090102', '', '0');
-INSERT INTO `student_group` VALUES ('7071005', '632090101', '', '0');
-INSERT INTO `student_group` VALUES ('7071002', '', '', '0');
-INSERT INTO `student_group` VALUES ('7071002', '', '', '0');
+INSERT INTO `student_group` VALUES ('1', '7071005', '632090102', '', '0');
+INSERT INTO `student_group` VALUES ('2', '7071005', '632090101', '', '0');
+INSERT INTO `student_group` VALUES ('3', '7071002', '', '', '0');
+INSERT INTO `student_group` VALUES ('4', '7071002', '', '', '0');
+INSERT INTO `student_group` VALUES ('5', '7071003', '61290101', '', '0');
+INSERT INTO `student_group` VALUES ('6', '7071003', '61290102', '', '0');
+INSERT INTO `student_group` VALUES ('7', '7071004', '62390105', '', '0');
+INSERT INTO `student_group` VALUES ('8', '7071004', '62390101', '', '0');
+INSERT INTO `student_group` VALUES ('9', '7071001', '63390101', '', '0');
+INSERT INTO `student_group` VALUES ('10', '7071001', '63390105', '', '0');
