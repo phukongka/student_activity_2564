@@ -1,0 +1,16 @@
+เอาข้อมูลมาแสดงตาม รหัสครูที่ปรึกษา
+1.SELECT * FROM `general_user` as u INNER JOIN student as s ON u.`group_id`=s.group_id  where u.user_id = 7071003
+2.SELECT * FROM `general_user` as u , student as s , student_group as sg  where (u.user_id = sg.user_id AND s.group_id = sg.group_id AND u.user_id = 7071003)
+
+3.SELECT u.user_id,u.user_name,s.student_id,s.std_name,s.std_lastname,s.gender,s.prefix,s.major_id,
+s.minor_id,s.group_id,sg.id,sg.user_id,sg.group_id,sg.co_advisor
+FROM `general_user` as u , student as s , student_group as sg
+where (u.user_id = sg.user_id AND s.group_id = sg.group_id AND u.user_id = 7071003)
+
+4.SELECT u.user_id,u.user_name,s.student_id,s.std_name,s.std_lastname,s.gender,s.prefix,s.major_id,
+s.minor_id,s.group_id,sg.id,sg.user_id,sg.group_id,sg.co_advisor
+ FROM `general_user` as u INNER JOIN student_group as sg ON u.user_id = sg.user_id  
+INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = 7071003
+
+
+
