@@ -106,13 +106,13 @@
 									<div class="input-group-prepend">
 								      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 								    </div>
-									<input class="form-control" type="text" name="email" placeholder="Enter Email">
+									<input class="form-control" type="text" name="user_email" placeholder="Enter Email">
 								</div><br>
 								<div class="input-group">
 									<div class="input-group-prepend">
 								      <span class="input-group-text"><i class="fas fa-key"></i></span>
 								    </div>
-									<input class="form-control" type="password" name="password" placeholder="Enter Password">
+									<input class="form-control" type="password" name="user_pass" placeholder="Enter Password">
 								</div>
 						</div>
 					<div class="modal-footer">
