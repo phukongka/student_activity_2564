@@ -1,3 +1,6 @@
+<?php
+   session_start();	
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +47,7 @@
 						</strong>
 					</div>
 					<div class="card-body">
-						<form method="post">
+						<form method="post" action="">
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -101,12 +104,12 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 						<div class="modal-body">
-							<form method="post">
+							<form method="post" action="#">
 								<div class="input-group">
 									<div class="input-group-prepend">
 								      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 								    </div>
-									<input class="form-control" type="text" name="user_email" placeholder="Enter Email">
+									<input class="form-control" type="text" name="user_id" placeholder="Enter Email">
 								</div><br>
 								<div class="input-group">
 									<div class="input-group-prepend">
@@ -116,11 +119,13 @@
 								</div>
 						</div>
 					<div class="modal-footer">
-						<button type="submit" name="login" class="btn btn-block btn-info">Login</button>
+						<button type="submit" name="login" class="btn btn-block btn-info" value="login">Login</button>
 						<!-- <button class="btn btn-danger" data-dismiss="modal">Close</button> -->
 					</form>
 					</div>
-					<?php include("login.php"); ?>
+					<?php
+								include("login.php"); 
+					?>
 				</div>
 			</div>
 		</div>
