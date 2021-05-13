@@ -37,3 +37,4 @@ where u.user_id = 7071003
 FROM
     home_room_check WHRE user_id = 7071003;
 
+

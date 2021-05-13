@@ -1,7 +1,7 @@
 <?php
 session_start();
 session_destroy();
-include('../includes/config.inc.php');
+include('includes/config.inc.php');
 //if (isset($_GET['submit'])){
    // $user=$_GET['group'];
   $user = '7071003';
@@ -9,7 +9,6 @@ include('../includes/config.inc.php');
   $result = mysqli_query($conn, $sql);
  
   ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,15 +16,15 @@ include('../includes/config.inc.php');
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ACTIVITY CTC Admin Manage Homeroom Activity</title>
-        <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" >
-        <link rel="stylesheet" href="../css/font-awesome.min.../" media="screen" >
-        <link rel="stylesheet" href="../css/animate-css/animate.min.css" media="screen" >
-        <link rel="stylesheet" href="../css/lobipanel/lobipanel.min.css" media="screen" >
-        <link rel="stylesheet" href="../css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
-        <link rel="stylesheet" type="../text/css" href="../js/DataTables/datatables.min.css"/>
-        <link rel="stylesheet" href="../css/main.css" media="screen" >    
+        <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
+        <link rel="stylesheet" href="css/font-awesome.min.css/" media="screen" >
+        <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
+        <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
+        <link rel="stylesheet" href="css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+        <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
+        <link rel="stylesheet" href="css/main.css" media="screen" >    
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" />
-        <script src="../js/modernizr/modernizr.min.js"></script>
+        <script src="js/modernizr/modernizr.min.js"></script>
           <style>
         .errorWrap {
     padding: 10px;
@@ -51,11 +50,11 @@ include('../includes/config.inc.php');
   <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->
-   <?php include('../includes/topbar.php');?> 
+   <?php include('includes/topbar.php');?> 
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-   <?php include('../includes/leftbar-user.php');?>  
+   <?php include('includes/leftbar-user.php');?>  
 
                     <div class="main-page">
                         <div class="container-fluid">
