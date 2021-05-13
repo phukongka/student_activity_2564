@@ -35,5 +35,5 @@ where u.user_id = 7071003
 		IF(check_status,week_check,NULL),
                  NULL)) AS tatal
 FROM
-    home_room_check;
+    home_room_check WHRE user_id = 7071003;
 
