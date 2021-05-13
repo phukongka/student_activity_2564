@@ -1,9 +1,9 @@
 <?php
 session_start();
-include('../includes/config.inc.php');
+include('includes/config.inc.php');
 if(!empty($_GET['week'])){
- $week = $_GET['week'];
- $_SESSION["week1"] =  $week;
+$_SESSION["week_number"] = $_GET['week'];
+$_GET['week'];
 }
 ?>
 <script>
@@ -15,13 +15,7 @@ if(!empty($_GET['week'])){
 </script>
 
 <?php
-// if(empty($week)){
-//     header('Location: manage-students-listall.php');
-//     exit;
-// }
 
-//if (isset($_GET['submit'])){
-   // $user=$_GET['group'];
   $user = '7071003';
   $sql = "SELECT * FROM general_user as u 
             INNER JOIN student_group as sg ON u.user_id = sg.user_id  
@@ -101,15 +95,15 @@ if(!empty($_POST["submit"])){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ACTIVITY CTC Admin Manage Homeroom Activity</title>
-        <link rel="stylesheet" href="../css/bootstrap.min.css" media="screen" >
-        <link rel="stylesheet" href="../css/font-awesome.min.../" media="screen" >
-        <link rel="stylesheet" href="../css/animate-css/animate.min.css" media="screen" >
-        <link rel="stylesheet" href="../css/lobipanel/lobipanel.min.css" media="screen" >
-        <link rel="stylesheet" href="../css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
-        <link rel="stylesheet" type="../text/css" href="../js/DataTables/datatables.min.css"/>
-        <link rel="stylesheet" href="../css/main.css" media="screen" >    
+        <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
+        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
+        <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
+        <link rel="stylesheet" href="css/prism/prism.css" media="screen" > <!-- USED FOR DEMO HELP - YOU CAN REMOVE IT -->
+        <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
+        <link rel="stylesheet" href="css/main.css" media="screen" >    
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" />
-        <script src="../js/modernizr/modernizr.min.js"></script>
+        <script src="js/modernizr/modernizr.min.js"></script>
           <style>
         .errorWrap {
     padding: 10px;
@@ -135,11 +129,11 @@ if(!empty($_POST["submit"])){
   <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->
-   <?php include('../includes/topbar.php');?> 
+   <?php include('includes/topbar.php');?> 
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-   <?php include('../includes/leftbar-user.php');?>  
+   <?php include('includes/leftbar-user.php');?>  
 
                     <div class="main-page">
                         <div class="container-fluid">
@@ -174,7 +168,7 @@ if(!empty($_POST["submit"])){
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                 <h5>เช็คชื่อเข้าร่วม  กิจกรรมโฮมรูม สัปดาห์ที่.<?php echo $_SESSION["week1"]  ?>.. สาขาวิชา...<?php echo $row1['major_name']?> อาจารย์ที่ปรึกษา  <?php echo $row['user_name'];?></h5>
+                                                 <h5>เช็คชื่อเข้าร่วม  กิจกรรมโฮมรูม สัปดาห์ที่.<?php echo $_SESSION["week_number"]  ?>.. สาขาวิชา...<?php echo $row1['major_name']?> อาจารย์ที่ปรึกษา  <?php echo $row['user_name'];?></h5>
                                                 </div>
                                             </div>  
                                             <div class="panel-body p-20">
@@ -202,8 +196,8 @@ if(!empty($_POST["submit"])){
                                                         </tr>
                                                     </tfoot>
  <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////          -->                       
-                                                    <form action="manage-students-homeroom.php" method="POST" >
-                                                    <tbody>
+                                            <form action="oak.php" method="POST" >
+                                        <tbody>
 <?php
   $no = 0; // ตัวแปรสำหรับ ตรวจสอบ ขาด ลา มาสาย
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
@@ -260,18 +254,18 @@ if(!empty($_POST["submit"])){
                                                 <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
                                                 <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
                                                 <input type="hidden" name="major_id[]" value="<?php echo $major_id ?>">
-                                                <input type="hidden" name="week[]" value="<?php echo $_SESSION["week1"] ?>">
+                                                <input type="hidden" name="week[]" value="<?php echo $_SESSION["week_number"] ?>">
                                                 <input type="hidden" name="user_id[]" value="<?php echo $user ?>">
-<?php  
-$no++; // ลำดับ
-}
-?>
+                                    <?php  
+                                    $no++; // ลำดับ
+                                    }
+                                    ?>
                                                     </tbody>
+                                                  </table>
+                                                  <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
+                                                </form>                                         
 
-                                                </table>
-                                               
-                                                <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
-                                                </form>
+
                                                 <!-- /.col-md-12 -->
                                             </div>
                                         </div>
@@ -306,6 +300,7 @@ $no++; // ลำดับ
             <!-- /.content-wrapper -->
 
         </div>
+      
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <script src="js/bootstrap/bootstrap.min.js"></script>
         <script src="js/pace/pace.min.js"></script>
