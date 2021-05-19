@@ -1,0 +1,341 @@
+PHP MySQL กับ Login Form ทำระบบ User ล็อกอิน แบบง่าย ๆ ด้วย PHP และ MySQL โดยทำการตรวจสอบ Username และ Password
+PHP MySQL กับ Login Form บทความนี้เป็นตัวอย่างการรทำ Form Login แบบง่าย ๆ ด้วยฐานข้อมูล MySQL โดยมีการตวจสอบ Username และ Password รวมทั้งสถานะว่าเป็น User หรือว่า Admin มีการแบ่งระดับการเข้าใช้งานของแต่ล่ะ Page และมีการนำ Session เพื่อเก็บค่าต่าง ๆ ที่ได้จากการ Login เช่น UserID หรือว่า Status ของสมาชิก
+
+เริ่มต้นด้วยการสร้างตารางชื่อ member
+
+CREATE TABLE `member` (
+  `UserID` int(3) unsigned zerofill NOT NULL auto_increment,
+  `Username` varchar(20) NOT NULL,
+  `Password` varchar(20) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `Status` enum('ADMIN','USER') NOT NULL default 'USER',
+  PRIMARY KEY  (`UserID`),
+  UNIQUE KEY `Username` (`Username`)
+) ENGINE=MyISAM  AUTO_INCREMENT=3 ;
+
+-- 
+-- Dumping data for table `member`
+-- 
+
+INSERT INTO `member` VALUES (001, 'win', 'win123', 'Weerachai Nukitram', 'USER');
+INSERT INTO `member` VALUES (002, 'chai', 'chai123', 'Surachai Sirisart', 'ADMIN');
+
+
+เกี่ยวกับตารางจะประกอบด้วย UserID , Username , Password , Name , Status โดยช่อง Status เป็นตัวประบุว่าเป็น ADMIN หรือว่า User
+
+login.php เป็น Form Login
+
+<html>
+<head>
+<title>ThaiCreate.Com Tutorials</title>
+</head>
+<body>
+<form name="form1" method="post" action="check_login.php">
+  Login<br>
+  <table border="1" style="width: 300px">
+    <tbody>
+      <tr>
+        <td> &nbsp;Username</td>
+        <td>
+          <input name="txtUsername" type="text" id="txtUsername">
+        </td>
+      </tr>
+      <tr>
+        <td> &nbsp;Password</td>
+        <td><input name="txtPassword" type="password" id="txtPassword">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <input type="submit" name="Submit" value="Login">
+</form>
+</body>
+</html>
+
+check_login.php เป็น Check Login
+
+<?php
+	session_start();
+	mysql_connect("localhost","root","root");
+	mysql_select_db("mydatabase");
+	$strSQL = "SELECT * FROM member WHERE Username = '".mysql_real_escape_string($_POST['txtUsername'])."' 
+	and Password = '".mysql_real_escape_string($_POST['txtPassword'])."'";
+	$objQuery = mysql_query($strSQL);
+	$objResult = mysql_fetch_array($objQuery);
+	if(!$objResult)
+	{
+			echo "Username and Password Incorrect!";
+	}
+	else
+	{
+			$_SESSION["UserID"] = $objResult["UserID"];
+			$_SESSION["Status"] = $objResult["Status"];
+
+			session_write_close();
+			
+			if($objResult["Status"] == "ADMIN")
+			{
+				header("location:admin_page.php");
+			}
+			else
+			{
+				header("location:user_page.php");
+			}
+	}
+	mysql_close();
+?>
+
+
+
+<?php
+	session_start();
+	mysql_connect("localhost","root","root");
+	mysql_select_db("mydatabase");
+	$strSQL = "SELECT * FROM member WHERE Username = '".mysql_real_escape_string($_POST['txtUsername'])."' 
+	and Password = '".mysql_real_escape_string($_POST['txtPassword'])."'";
+	$objQuery = mysql_query($strSQL);
+	$objResult = mysql_fetch_array($objQuery);
+	if(!$objResult)
+	{
+			echo "Username and Password Incorrect!";
+	}
+	else
+	{
+			$_SESSION["UserID"] = $objResult["UserID"];
+			$_SESSION["Status"] = $objResult["Status"];
+
+			session_write_close();
+			
+			if($objResult["Status"] == "ADMIN")
+			{
+				header("location:admin_page.php");
+			}
+			else
+			{
+				header("location:user_page.php");
+			}
+	}
+	mysql_close();
+?>
+
+ไฟล์นี้จะทำการตรวจสอบ Username และ Password และสถานะของสมาชิกว่าเป็น Admin หรือว่า User ถ้า Admin จะกระโดดไปหน้า admin_page.php และถ้าเป็น User จะกระโดดไปหน้า user_page.php
+
+admin_page.php เป็นหน้าหลักของ Admin
+
+<?php
+	session_start();
+	if($_SESSION['UserID'] == "")
+	{
+		echo "Please Login!";
+		exit();
+	}
+
+	if($_SESSION['Status'] != "ADMIN")
+	{
+		echo "This page for Admin only!";
+		exit();
+	}	
+	
+	mysql_connect("localhost","root","root");
+	mysql_select_db("mydatabase");
+	$strSQL = "SELECT * FROM member WHERE UserID = '".$_SESSION['UserID']."' ";
+	$objQuery = mysql_query($strSQL);
+	$objResult = mysql_fetch_array($objQuery);
+?>
+<html>
+<head>
+<title>ThaiCreate.Com Tutorials</title>
+</head>
+<body>
+  Welcome to Admin Page! <br>
+  <table border="1" style="width: 300px">
+    <tbody>
+      <tr>
+        <td width="87"> &nbsp;Username</td>
+        <td width="197"><?php echo $objResult["Username"];?>
+        </td>
+      </tr>
+      <tr>
+        <td> &nbsp;Name</td>
+        <td><?php echo $objResult["Name"];?></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <a href="edit_profile.php">Edit</a><br>
+  <br>
+  <a href="logout.php">Logout</a>
+</body>
+</html>
+
+หน้าหลักของ Admin จะมีการตรวจสอบ Session ว่าผ่านการ Login มาหรือไม่ และตรวจสอบสถานะด้วยว่าเป็น Admin หรือไม่
+
+
+user_page.php เป็นหน้าหลักของ User
+
+<?php
+	session_start();
+	if($_SESSION['UserID'] == "")
+	{
+		echo "Please Login!";
+		exit();
+	}
+
+	if($_SESSION['Status'] != "USER")
+	{
+		echo "This page for User only!";
+		exit();
+	}	
+	
+	mysql_connect("localhost","root","root");
+	mysql_select_db("mydatabase");
+	$strSQL = "SELECT * FROM member WHERE UserID = '".$_SESSION['UserID']."' ";
+	$objQuery = mysql_query($strSQL);
+	$objResult = mysql_fetch_array($objQuery);
+?>
+<html>
+<head>
+<title>ThaiCreate.Com Tutorials</title>
+</head>
+<body>
+  Welcome to User Page! <br>
+  <table border="1" style="width: 300px">
+    <tbody>
+      <tr>
+        <td width="87"> &nbsp;Username</td>
+        <td width="197"><?php echo $objResult["Username"];?>
+        </td>
+      </tr>
+      <tr>
+        <td> &nbsp;Name</td>
+        <td><?php echo $objResult["Name"];?></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <a href="edit_profile.php">Edit</a><br>
+  <br>
+  <a href="logout.php">Logout</a>
+</body>
+</html>
+
+หน้าหลักของ User จะมีการตรวจสอบ Session ว่าผ่านการ Login มาหรือไม่ และตรวจสอบสถานะด้วยว่าเป็น User หรือไม่
+
+edit_profile.php เป็นหน้าสำหนับแก้ไขข้อมูชส่วนตัวของ User และ Admin
+
+<?php
+	session_start();
+	if($_SESSION['UserID'] == "")
+	{
+		echo "Please Login!";
+		exit();
+	}
+	
+	mysql_connect("localhost","root","root");
+	mysql_select_db("mydatabase");
+	$strSQL = "SELECT * FROM member WHERE UserID = '".$_SESSION['UserID']."' ";
+	$objQuery = mysql_query($strSQL);
+	$objResult = mysql_fetch_array($objQuery);
+?>
+<html>
+<head>
+<title>ThaiCreate.Com Tutorials</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body>
+<form name="form1" method="post" action="save_profile.php">
+  Edit Profile! <br>
+  <table width="400" border="1" style="width: 400px">
+    <tbody>
+      <tr>
+        <td width="125"> &nbsp;UserID</td>
+        <td width="180">
+          <?php echo $objResult["UserID"];?>
+        </td>
+      </tr>
+      <tr>
+        <td> &nbsp;Username</td>
+        <td>
+          <?php echo $objResult["Username"];?>
+        </td>
+      </tr>
+      <tr>
+        <td> &nbsp;Password</td>
+        <td><input name="txtPassword" type="password" id="txtPassword" value="<?php echo $objResult["Password"];?>">
+        </td>
+      </tr>
+      <tr>
+        <td> &nbsp;Confirm Password</td>
+        <td><input name="txtConPassword" type="password" id="txtConPassword" value="<?php echo $objResult["Password"];?>">
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;Name</td>
+        <td><input name="txtName" type="text" id="txtName" value="<?php echo $objResult["Name"];?>"></td>
+      </tr>
+      <tr>
+        <td> &nbsp;Status</td>
+        <td>
+          <?php echo $objResult["Status"];?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <input type="submit" name="Submit" value="Save">
+</form>
+</body>
+</html>
+
+
+save_profile.php เป็นหน้าสำหนับบันทึกแก้ไขข้อมูลส่วนตัวของ User และ Admin
+
+<?php
+	session_start();
+	if($_SESSION['UserID'] == "")
+	{
+		echo "Please Login!";
+		exit();
+	}
+	mysql_connect("localhost","root","root");
+	mysql_select_db("mydatabase");
+	
+	if($_POST["txtPassword"] != $_POST["txtConPassword"])
+	{
+		echo "Password not Match!";
+		exit();
+	}
+	$strSQL = "UPDATE member SET Password = '".trim($_POST['txtPassword'])."' 
+	,Name = '".trim($_POST['txtName'])."' WHERE UserID = '".$_SESSION["UserID"]."' ";
+	$objQuery = mysql_query($strSQL);
+	
+	echo "Save Completed!<br>";		
+	
+	if($_SESSION["Status"] == "ADMIN")
+	{
+		echo "<br> Go to <a href='admin_page.php'>Admin page</a>";
+	}
+	else
+	{
+		echo "<br> Go to <a href='user_page.php'>User page</a>";
+	}
+	
+	mysql_close();
+?>
+
+สำหรับหน้านี้เมื่อทีการบันทึกเสร็จสิ้นแล้ว โปรแกรมจะตรวจสอบว่าเป็น User หรือว่า Admin ถ้า Admin จะชี้ลิ้งค์ไปหน้า admin_page.php และถ้าเป็น User จะชี้ลิ้งค์ไปหน้า user_page.php
+
+
+logout.php เป็นหน้า Logout หรือ Clear Session
+
+<?php
+	session_start();
+	session_destroy();
+	header("location:login.php");
+?>
+
+
+
+
+
+
