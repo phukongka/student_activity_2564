@@ -1,23 +1,16 @@
 <?php
 session_start();
 include('includes/config.inc.php');
-if(!empty($_GET['week'])){
-$_SESSION["week_number"] = $_GET['week'];
 $week = $_SESSION["week_number"];
-}
-$user=$_SESSION['user'];
-
+$user= $_SESSION['user'];
 ?>
 <script>
- function prev(){
-     alert('ข้อมูลได้บันทึกครบแล้ว ');
-     window.location="manage-students-listall.php";
-
- }
+  function prev(){
+      alert('ข้อมูลได้บันทึกแล้ว ');
+      window.location="manage-students-listall.php";
+  }
 </script>
-
 <?php
-
   $user = '7071003';
   $_SESSION['user'] = $user;
   $sql = "SELECT * FROM general_user as u 
@@ -31,99 +24,75 @@ $user=$_SESSION['user'];
   INNER JOIN major as mj ON s.major_id = mj.major_code where s.user_id = '$user' ";
   $result1 = mysqli_query($conn, $sql1);
   $row_all = mysqli_num_rows($result1);
-  
   $row1 = mysqli_fetch_assoc($result1); // แผนกในที่ปรึกษา
   $major_name = $row1['major_name'];
   $major_id = $row1['major_id'];
   $minor_id = $row1['minor_id'];
-  
   $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
-
 //check จำนวนแถวของสัปดาห์
 $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
 $result_init1 = mysqli_query($conn, $sql_init1);
 $num_row1 = mysqli_num_rows($result_init1);
   // insert ลงตาราง homeroom 
-
-  if(!empty($_POST["submit"])  ){
+if(!empty($_POST["submit"])  ){
     // TODO
-    //var_dump($_POST );
+    $student_id = $_POST['student_id'];
+    $group_id = $_POST['group_id'];
+    $comment = $_POST['comment'];
+    $detail = $_POST['detail'];
+    $check_ = $_POST['check_'];  
+    var_dump($detail );
+    $limit = count($_POST['check_']); 
+    //  echo "check=".$limit."<br>";
+    $check_array=$_POST['check_'];
+    foreach($_POST['check_'] as $key => $value){
+        if(in_array($_POST['check_'][$key], $check_array)){
+            echo $_POST['check_'][$key]."<br>";
+            echo $_POST['detail'][$key]."<br>";
+            echo $_POST['comment'][$key]."<br>";
+        }
 
-    $check_array_student_id=$_POST['student_id'];
+    }
+
+
+
+
+  //  echo "row_all=".$row_all."<br>";//จำนวนนักเรียน ต่อครูที่ปรีกษา ด้วย mysqli_num_rows
+  //    $Date = mysql_real_escape_string($_POST['trans_date']);
+  //ตรวจสอบ ข้อมูล ใน week นั้นๆ
+//   $sql_init = "SELECT * FROM home_risk_topic WHERE week_check = '$week' ";
+//   $result_init = mysqli_query($conn, $sql_init);
+//   $num_row = mysqli_num_rows($result_init);
+
+//   if($num_row > 0){ // เริ่มนับต่างกัน
+//    echo "<script> alert('updatae'); </script>";
+//  }else{
+//   $i = 0;
+//   while ($i < $limit  ) {
+//      // echo "<br>chesk_init=".$check_[$i]."<br>";
+//       if($check_[$i] == 1){
+//          // echo "<br>detail=".$detail[$i]."<br>";
+//         $sql = "INSERT INTO home_risk_topic VALUES ('', '$detail[$i]', '$student_id[$i]', NOW(),'$week','$comment[$i]','$user')";   
+//             if ($conn->query($sql) === FALSE) {
+//             //   echo "New record created successfully"
+//                 echo "Error: " . $sql . "<br>" . $conn->error;
+//           }
+//         }
     
-    $check_array_radio=$_POST['check_n'];
-    echo "<br><br><hr>";
-    var_dump('chek_radio_n=', $check_array_radio);
-    echo "<br><br><hr>";
-    //print_r($check_array_radio);
-    $cnt = count($_POST['check_n']);
-    echo "cnt=".$cnt."<br>";
-    
-    // foreach($_POST['check_n'] as $key => $value){
-    //     if(in_array($_POST['check_n'][$key], $check_array_radio)){   
-    //         $check_ = $_POST['check_'][$key];
-    //         echo "inarray=".$check_;
-    //         $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'week','$student_id',NOW(),'$user','$major_id','minor_id','$group_id','$check_')";   
-    //         if ($conn->query($sql) === FALSE) {
-    //         //   echo "New record created successfully"
-    //         echo "Error: " . $sql . "<br>" . $conn->error;
-    //         }
-    //     }
-    // }   
-    foreach($_POST['student_n'] as $key => $value){
-            if(in_array($_POST['student_n'][$key], $check_array_student_id)){                   
-            $student_id = $_POST['student_id'][$key]; 
-            $check_ = $_POST['check_'][$key];       
-            $group_id = $_POST['group_id'];
-            // check duplicate
-            $sql2 = "SELECT * FROM home_room_check WHERE week_check = '$week' AND student_id='$student_id' ";
-            $result2 = mysqli_query($conn, $sql2);
-            $num_row = mysqli_num_rows($result2);
-            if($num_row > 0){
-                echo "บันทึกแล้ว";
-            }else{
-            $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week','$student_id',NOW(),'$user','$major_id[$key]','minor_id','$group_id','$check_')";   
-                if ($conn->query($sql) === FALSE) {
-                //   echo "New record created successfully"
-                echo "Error: " . $sql . "<br>" . $conn->error;
-                }
-            }
-        } //end if in_array
-    }// end foreach
-
-    // //ตรวจสอบ ข้อมูล ใน week นั้นๆ
-    // $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-    // $result_init = mysqli_query($conn, $sql_init);
-    // $num_row = mysqli_num_rows($result_init);
-    // //echo "<br>num_row=".$num_row."<br>";
-    // //var_dump("check_=",$_POST['check_']);
-    // //echo "<br>";
-    // //echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
-    //  if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
-    //  // echo "<script> alert('updatae'); </script>";
-    //     $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
-    //     if ($conn->query($sql_set) === TRUE) {
-    //     echo "Record updated successfully";
-    //     echo "<script>";
-    //     //echo "prev()";//ข้อมูลซ้ำ
-    //     echo "<
-    //     /script>";
-    //     } else {
-    //     echo "Error updating record: " . $conn->error;
-    //     }
-    // }
-
-   $conn->close();
- 
+//       $i++;
+//     }  //end while
+//  // }// end else
 }
-  ?>
+    $conn->close();
+  
 
+  ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ACTIVITY CTC Admin Manage Homeroom Activity</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
@@ -160,11 +129,11 @@ $num_row1 = mysqli_num_rows($result_init1);
   <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->
-   <?php include('includes/topbar.php');?> 
+  <?php include('includes/topbar.php');?> 
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-   <?php include('includes/leftbar-user.php');?>  
+  <?php include('includes/leftbar-user.php');?>  
 
                     <div class="main-page">
                         <div class="container-fluid">
@@ -180,9 +149,9 @@ $num_row1 = mysqli_num_rows($result_init1);
                             <div class="row breadcrumb-div">
                                 <div class="col-md-6">
                                     <ul class="breadcrumb">
-            							<li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
+							<li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                         <li>กิจกรรมโฮมรูม</li>
-            							<li class="active">เช็คชื่อเข้าร่วมกิจกรรมโฮมรูม</li>
+                      						<li class="active">เช็คชื่อเข้าร่วมกิจกรรมโฮมรูม</li>
             						</ul>
                                 </div>
                              
@@ -215,9 +184,9 @@ $num_row1 = mysqli_num_rows($result_init1);
                                                             <th>#</th>
                                                             <th>รหัส </th>                                                                                                                     
                                                             <th>ชื่อ - นามสกุล</th>
-                                                            <th>สาขาวิชา</th>  
-                                                            <th>กลุ่มการเรียน</th>
-                                                            <th>สถานะการเข้าร่วม</th>
+                                                            <th>รายละเอียด</th>  
+                                                            <th>หมายเหตุ</th>
+                                                            <th>สถานะ</th>
                                                          
                                                         </tr>
                                                     </thead>
@@ -226,9 +195,9 @@ $num_row1 = mysqli_num_rows($result_init1);
                                                         <th>ลำดับ</th>
                                                             <th>รหัส </th>
                                                             <th>ชื่อ - นามสกุล</th>
-                                                            <th>สาขาวิชา</th>  
-                                                            <th>กลุ่มการเรียน</th>
-                                                            <th>สถานะการเข้าร่วม</th>
+                                                            <th>รายละเอียด</th>  
+                                                            <th>หมายเหตุ</th>
+                                                            <th>สถานะ</th>
                                                         </tr>
                                                     </tfoot>
  <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////          -->                       
@@ -239,7 +208,7 @@ $num_row1 = mysqli_num_rows($result_init1);
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
   $number= 0; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
-   $number++;
+    $number++;
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];
@@ -248,103 +217,77 @@ $num_row1 = mysqli_num_rows($result_init1);
    $group_id = $row['group_id'];
   
 ?>
-            <tr>
-            <td><?php echo $number;?></td>
-            <td><?php echo $row['student_id'];?></td>
-            <td> <?php echo $row['prefix'].$row['std_name']."&nbsp;&nbsp;".$row['std_lastname'];?></td>  
-            <td><?php echo $major_name;?></td>        
-            <td><?php echo $std_level;?></td>                             
-            <td>
-            <div class="radio icheck-emerland">
-                <input type="radio" id="emerland<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="1"  checked/>
-               
-                <label for="emerland<?php echo $id ?>">มา</label>  
-                                                                    
-            </div>
-            <?php 
-            $id++ ;
-            ?>
-            <div class="radio icheck-pomegranate">
-                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="2" />
-               
-                <label for="pomegranate<?php echo $id ?>">ขาด</label>
-                
-            </div>
-            <?php 
-            $id++ ;
-            ?>
-            <div class="radio icheck-amethyst">
-                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="3" />
-               
-                <label for="pomegranate<?php echo $id ?>">สาย</label>       
-            </div>
-            <?php                                                             
-            $id++;// label name for
-            ?>
-            <div class="radio icheck-sunflower">
-                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="4" />
-                <label for="pomegranate<?php echo $id ?>">ลา</label> 
-                <input type="hidden" name="student_id[<?php echo $no ?>]" value="<?php echo $student_id ?>">
-                <input type="hidden" name="student_n[<?php echo $no ?>]" value="<?php echo $student_id ?>">
-                <input type="hidden"  name="check_n[<?php echo $no ?>]" value="<?php echo $no ?>"  />
-                            
-              <!--  <input type="hidden" name="student_id[]" value="<?php // echo $student_id ?>">  
-                <input type="hidden" name="student_n[]" value="<?php// echo $student_id ?>">   
-                <input type="hidden"  name="check_n[]" value="<?php // echo $no ?>"  />   -->
-                <input type="hidden" name="prefix[]" value="<?php echo $prefix ?>">
-                <input type="hidden" name="std_name[]" value="<?php echo $std_name ?>">
-                <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
-                <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
+                                                          <tr>
+                                                            <td><?php echo $number;?></td>
+                                                            <td><?php echo $row['student_id'];?></td>
+                                                            <td> <?php echo $row['prefix'].$row['std_name']."&nbsp;&nbsp;".$row['std_lastname'];?></td>  
+                                                            <td><input type="text" name="detail[]" value=""></td>        
+                                                            <td><input type="text" name="comment[]" value=""></td>                             
+                                                            <td>
+                                                            <div class="radio icheck-emerland">
+                                                                <input type="checkbox" id="emerland<?php echo $id ?>" name="check_[]" value="1"  />
+                                                                <label for="emerland<?php echo $id ?>">เสี่ยง</label>  
+                                                                                                                            
+                                                            </div>
+                                                            <?php 
+                                                            $id++ ;
+                                                            ?>
+                                                <input type="hidden" name="student_id[]" value="<?php echo $student_id ?>">
+                                                <input type="hidden" name="prefix[]" value="<?php echo $prefix ?>">
+                                                <input type="hidden" name="std_name[]" value="<?php echo $std_name ?>">
+                                                <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
+                                                <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
+                                                
+                        
+                                              
+                                                            </div>
+                                                            </td>
+                                                            </tr>                                               
+                                    <?php  
+                                    $no++; // ลำดับ
+                                    }
+                                    ?>
+                                    
+                                                    </tbody>
+                                                  </table>
+                                                  <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
+                                                </form>                                         
+                                                </body>
 
-            </div>
-            </td>
-            </tr>
+                                                <!-- /.col-md-12 -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-6 -->
+                                                               
+                                                </div>
+                                                <!-- /.col-md-12 -->
+                                            </div>
+                                        </div>
+                                        <!-- /.panel -->
+                                    </div>
+                                    <!-- /.col-md-6 -->
 
-        <?php  
-        $no++; // ลำดับ
-        $number++;
-        }
-        ?>
-        
-                        </tbody>
-                        </table>
-                        <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
-                    </form>                                         
-                    </body>
-
-                    <!-- /.col-md-12 -->
-                    
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-6 -->                         
                                 </div>
-                                <!-- /.col-md-12 -->
+                                <!-- /.row -->
+
                             </div>
-                        </div>
-                        <!-- /.panel -->
+                            <!-- /.container-fluid -->
+                        </section>
+                        <!-- /.section -->
+
                     </div>
-                    <!-- /.col-md-6 -->
+                    <!-- /.main-page -->
+
+                    
 
                 </div>
-                <!-- /.row -->
-
+                <!-- /.content-container -->
             </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.section -->
-
-    </div>
-    <!-- /.main-page -->
-
-            
+            <!-- /.content-wrapper -->
 
         </div>
-        <!-- /.content-container -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    </div>
       
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <script src="js/bootstrap/bootstrap.min.js"></script>

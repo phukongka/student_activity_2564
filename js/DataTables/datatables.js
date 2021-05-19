@@ -98881,7 +98881,7 @@ window.pdfMake = window.pdfMake || {}; window.pdfMake.vfs = {"LICENSE.txt":"DQog
 		 *      } );
 		 *    } )
 		 */
-		"iDisplayLength": 10,
+		"iDisplayLength": 50,
 	
 	
 		/**
@@ -101328,7 +101328,7 @@ window.pdfMake = window.pdfMake || {}; window.pdfMake.vfs = {"LICENSE.txt":"DQog
 		 *  @type int
 		 *  @default 10
 		 */
-		"_iDisplayLength": 10,
+		"_iDisplayLength": 50,
 	
 		/**
 		 * Paging start point - aiDisplay index

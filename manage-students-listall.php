@@ -1,10 +1,11 @@
 <?php
 session_start();
-session_destroy();
+//session_destroy();
 include('includes/config.inc.php');
 //if (isset($_GET['submit'])){
    // $user=$_GET['group'];
-  $user = '7071003';
+  $_SESSION['user'] = '7071003';
+  $user=$_SESSION['user'];
   $sql = "SELECT * FROM home_room_class ";
   $result = mysqli_query($conn, $sql);
  
@@ -47,6 +48,7 @@ include('includes/config.inc.php');
     </head>
 
 <body class="top-navbar-fixed">
+
   <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->

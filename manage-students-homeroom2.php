@@ -45,74 +45,77 @@ $result_init1 = mysqli_query($conn, $sql_init1);
 $num_row1 = mysqli_num_rows($result_init1);
   // insert ลงตาราง homeroom 
 
-  if(!empty($_POST["submit"])  ){
+if(!empty($_POST["submit"]) || ($num_row1 > 1) ){
     // TODO
-    //var_dump($_POST );
+   $student_id = $_POST['student_id'];
+   $group_id = $_POST['group_id'];
+   $check_ = $_POST['check_'];  
+   //var_dump($_POST);
+   $limit = count($_POST['check_']); 
+  //  echo "check=".$limit."<br>";
+  //  echo "row_all=".$row_all."<br>";//จำนวนนักเรียน ต่อครูที่ปรีกษา ด้วย mysqli_num_rows
+  //    $Date = mysql_real_escape_string($_POST['trans_date']);
+//ตรวจสอบ ข้อมูล ใน week นั้นๆ
+$sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+$result_init = mysqli_query($conn, $sql_init);
+$num_row = mysqli_num_rows($result_init);
+//echo "<br>num_row=".$num_row."<br>";
+//var_dump("check_=",$_POST['check_']);
+//echo "<br>";
+//echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
+ if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
+ // echo "<script> alert('updatae'); </script>";
+    $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
+    if ($conn->query($sql_set) === TRUE) {
+    echo "Record updated successfully";
+    echo "<script>";
+    //echo "prev()";//ข้อมูลซ้ำ
+    echo "<
+    /script>";
+    } else {
+    echo "Error updating record: " . $conn->error;
+    }
+}
 
-    $check_array_student_id=$_POST['student_id'];
+// ตรวจสอบบันทึกทีละ 10 แถว
+
+// if($num_row <= 0 ){
+//     $i=0;
+// }
+//  if($num_row >= 10 && $num_row <=20  ){
+//      $i=10;
+//  }
+// if($no >= 10 && $no <= 25  ){
+//     $i=26;
+// }
+// if($no == 0 ){
+//     $i=0;
+// }
+$i = 0;
+//echo "befor while i=".$i."limit= $limit<br>";
+    while ($i < $limit  ) {
+//echo "after while i=".$i."<br>";
+        // $week = $_POST['week'];
+    $sql2 = "SELECT * FROM home_room_check WHERE week_check = '$week' AND student_id='$student_id[$i]' ";
+    $result2 = mysqli_query($conn, $sql2);
+    $num_row = mysqli_num_rows($result2);
+    if($num_row > 0 ){
+    echo "<script>";
+ //   echo "prev()";//ข้อมูลซ้ำ
+    echo "</script>";
+
+    }else{ 
+        //echo "check_id".$check_[$i]."<br>";
+        $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week','$student_id[$i]',NOW(),'$user','$major_id','minor_id','$group_id[$i]','$check_[$i]')";        
+          if ($conn->query($sql) === FALSE) {
+           //   echo "New record created successfully"
+              echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        
+    } //end else
+     $i++;
     
-    $check_array_radio=$_POST['check_n'];
-    echo "<br><br><hr>";
-    var_dump('chek_radio_n=', $check_array_radio);
-    echo "<br><br><hr>";
-    //print_r($check_array_radio);
-    $cnt = count($_POST['check_n']);
-    echo "cnt=".$cnt."<br>";
-    
-    // foreach($_POST['check_n'] as $key => $value){
-    //     if(in_array($_POST['check_n'][$key], $check_array_radio)){   
-    //         $check_ = $_POST['check_'][$key];
-    //         echo "inarray=".$check_;
-    //         $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'week','$student_id',NOW(),'$user','$major_id','minor_id','$group_id','$check_')";   
-    //         if ($conn->query($sql) === FALSE) {
-    //         //   echo "New record created successfully"
-    //         echo "Error: " . $sql . "<br>" . $conn->error;
-    //         }
-    //     }
-    // }   
-    foreach($_POST['student_n'] as $key => $value){
-            if(in_array($_POST['student_n'][$key], $check_array_student_id)){                   
-            $student_id = $_POST['student_id'][$key]; 
-            $check_ = $_POST['check_'][$key];       
-            $group_id = $_POST['group_id'];
-            // check duplicate
-            $sql2 = "SELECT * FROM home_room_check WHERE week_check = '$week' AND student_id='$student_id' ";
-            $result2 = mysqli_query($conn, $sql2);
-            $num_row = mysqli_num_rows($result2);
-            if($num_row > 0){
-                echo "บันทึกแล้ว";
-            }else{
-            $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week','$student_id',NOW(),'$user','$major_id[$key]','minor_id','$group_id','$check_')";   
-                if ($conn->query($sql) === FALSE) {
-                //   echo "New record created successfully"
-                echo "Error: " . $sql . "<br>" . $conn->error;
-                }
-            }
-        } //end if in_array
-    }// end foreach
-
-    // //ตรวจสอบ ข้อมูล ใน week นั้นๆ
-    // $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-    // $result_init = mysqli_query($conn, $sql_init);
-    // $num_row = mysqli_num_rows($result_init);
-    // //echo "<br>num_row=".$num_row."<br>";
-    // //var_dump("check_=",$_POST['check_']);
-    // //echo "<br>";
-    // //echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
-    //  if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
-    //  // echo "<script> alert('updatae'); </script>";
-    //     $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
-    //     if ($conn->query($sql_set) === TRUE) {
-    //     echo "Record updated successfully";
-    //     echo "<script>";
-    //     //echo "prev()";//ข้อมูลซ้ำ
-    //     echo "<
-    //     /script>";
-    //     } else {
-    //     echo "Error updating record: " . $conn->error;
-    //     }
-    // }
-
+    }// end while
    $conn->close();
  
 }
@@ -239,7 +242,7 @@ $num_row1 = mysqli_num_rows($result_init1);
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
   $number= 0; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
-   $number++;
+    $number++;
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];
@@ -248,103 +251,96 @@ $num_row1 = mysqli_num_rows($result_init1);
    $group_id = $row['group_id'];
   
 ?>
-            <tr>
-            <td><?php echo $number;?></td>
-            <td><?php echo $row['student_id'];?></td>
-            <td> <?php echo $row['prefix'].$row['std_name']."&nbsp;&nbsp;".$row['std_lastname'];?></td>  
-            <td><?php echo $major_name;?></td>        
-            <td><?php echo $std_level;?></td>                             
-            <td>
-            <div class="radio icheck-emerland">
-                <input type="radio" id="emerland<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="1"  checked/>
-               
-                <label for="emerland<?php echo $id ?>">มา</label>  
-                                                                    
-            </div>
-            <?php 
-            $id++ ;
-            ?>
-            <div class="radio icheck-pomegranate">
-                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="2" />
-               
-                <label for="pomegranate<?php echo $id ?>">ขาด</label>
-                
-            </div>
-            <?php 
-            $id++ ;
-            ?>
-            <div class="radio icheck-amethyst">
-                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="3" />
-               
-                <label for="pomegranate<?php echo $id ?>">สาย</label>       
-            </div>
-            <?php                                                             
-            $id++;// label name for
-            ?>
-            <div class="radio icheck-sunflower">
-                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="4" />
-                <label for="pomegranate<?php echo $id ?>">ลา</label> 
-                <input type="hidden" name="student_id[<?php echo $no ?>]" value="<?php echo $student_id ?>">
-                <input type="hidden" name="student_n[<?php echo $no ?>]" value="<?php echo $student_id ?>">
-                <input type="hidden"  name="check_n[<?php echo $no ?>]" value="<?php echo $no ?>"  />
-                            
-              <!--  <input type="hidden" name="student_id[]" value="<?php // echo $student_id ?>">  
-                <input type="hidden" name="student_n[]" value="<?php// echo $student_id ?>">   
-                <input type="hidden"  name="check_n[]" value="<?php // echo $no ?>"  />   -->
-                <input type="hidden" name="prefix[]" value="<?php echo $prefix ?>">
-                <input type="hidden" name="std_name[]" value="<?php echo $std_name ?>">
-                <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
-                <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
+ 
+                                                         <tr>
+                                                            <td><?php echo $number;?></td>
+                                                            <td><?php echo $row['student_id'];?></td>
+                                                            <td> <?php echo $row['prefix'].$row['std_name']."&nbsp;&nbsp;".$row['std_lastname'];?></td>  
+                                                            <td><?php echo $major_name;?></td>        
+                                                            <td><?php echo $std_level;?></td>                             
+                                                            <td>
+                                                            <div class="radio icheck-emerland">
+                                                                <input type="radio" id="emerland<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="1"  checked/>
+                                                                <label for="emerland<?php echo $id ?>">มา</label>                                                               
+                                                            </div>
+                                                            <?php 
+                                                            $id++ ;
+                                                            ?>
+                                                            <div class="radio icheck-pomegranate">
+                                                                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="2" />
+                                                                <label for="pomegranate<?php echo $id ?>">ขาด</label>
+                                                            </div>
+                                                            <?php 
+                                                            $id++ ;
+                                                            ?>
+                                                            <div class="radio icheck-amethyst">
+                                                                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="3" />
+                                                                <label for="pomegranate<?php echo $id ?>">สาย</label>
+                                                            </div>
+                                                            <?php                                                             
+                                                            $id++;// label name for
+                                                            ?>
+                                                            <div class="radio icheck-sunflower">
+                                                                <input type="radio"  id="pomegranate<?php echo $id ?>" name="check_[<?php echo $no ?>]" value="4" />
+                                                                <label for="pomegranate<?php echo $id ?>">ลา</label>
+                                                                <input type="hidden" name="student_id[]" value="<?php echo $student_id ?>">
+                                                <input type="hidden" name="prefix[]" value="<?php echo $prefix ?>">
+                                                <input type="hidden" name="std_name[]" value="<?php echo $std_name ?>">
+                                                <input type="hidden" name="std_lastname[]" value="<?php echo $std_lastname ?>">
+                                                <input type="hidden" name="group_id[]" value="<?php echo $group_id ?>">
+                                                
+                        
+                                              
+                                                            </div>
+                                                            </td>
+                                                            </tr>
+                                               
+                                    <?php  
+                                    $no++; // ลำดับ
+                                    }
+                                    ?>
+                                    
+                                                    </tbody>
+                                                  </table>
+                                                  <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
+                                                </form>                                         
+                                                </body>
 
-            </div>
-            </td>
-            </tr>
+                                                <!-- /.col-md-12 -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.col-md-6 -->
 
-        <?php  
-        $no++; // ลำดับ
-        $number++;
-        }
-        ?>
-        
-                        </tbody>
-                        </table>
-                        <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
-                    </form>                                         
-                    </body>
+                                                               
+                                                </div>
+                                                <!-- /.col-md-12 -->
+                                            </div>
+                                        </div>
+                                        <!-- /.panel -->
+                                    </div>
+                                    <!-- /.col-md-6 -->
 
-                    <!-- /.col-md-12 -->
-                    
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-6 -->                         
                                 </div>
-                                <!-- /.col-md-12 -->
+                                <!-- /.row -->
+
                             </div>
-                        </div>
-                        <!-- /.panel -->
+                            <!-- /.container-fluid -->
+                        </section>
+                        <!-- /.section -->
+
                     </div>
-                    <!-- /.col-md-6 -->
+                    <!-- /.main-page -->
+
+                    
 
                 </div>
-                <!-- /.row -->
-
+                <!-- /.content-container -->
             </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.section -->
-
-    </div>
-    <!-- /.main-page -->
-
-            
+            <!-- /.content-wrapper -->
 
         </div>
-        <!-- /.content-container -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    </div>
       
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <script src="js/bootstrap/bootstrap.min.js"></script>
