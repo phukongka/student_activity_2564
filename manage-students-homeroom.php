@@ -1,56 +1,48 @@
 <?php
-session_start();
-include('includes/config.inc.php');
-if(!empty($_GET['week'])){
-$_SESSION["week_number"] = $_GET['week'];
-$week = $_SESSION["week_number"];
-}
-$user=$_SESSION['user'];
+    session_start();
+    include('includes/config.inc.php');
+    if(!empty($_GET['week'])){
+    $_SESSION["week_number"] = $_GET['week'];
+    $week = $_SESSION["week_number"];
+    }
+    $user=$_SESSION['user'];
 
 ?>
-<script>
- function prev(){
-     alert('ข้อมูลได้บันทึกครบแล้ว ');
-     window.location="manage-students-listall.php";
-
- }
-</script>
-
+    <script>
+    function prev(){
+        alert('ข้อมูลได้บันทึกครบแล้ว ');
+        window.location="manage-students-listall.php";
+    }
+    </script>
 <?php
-
-  $user = '7071003';
-  $_SESSION['user'] = $user;
-  $sql = "SELECT * FROM general_user as u 
-            INNER JOIN student_group as sg ON u.user_id = sg.user_id  
-            INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = '$user' ";
-  $result = mysqli_query($conn, $sql);
+    $user = '7071003';
+    $_SESSION['user'] = $user;
+    $sql = "SELECT * FROM general_user as u 
+                INNER JOIN student_group as sg ON u.user_id = sg.user_id  
+                INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = '$user' ";
+    $result = mysqli_query($conn, $sql);
 
   ////////////////////////
   //no loop ดึงข้อมูลแสดงส่วนหัวของตาราง
   $sql1 = "SELECT * FROM student as s 
-  INNER JOIN major as mj ON s.major_id = mj.major_code where s.user_id = '$user' ";
-  $result1 = mysqli_query($conn, $sql1);
-  $row_all = mysqli_num_rows($result1);
-  
-  $row1 = mysqli_fetch_assoc($result1); // แผนกในที่ปรึกษา
-  $major_name = $row1['major_name'];
-  $major_id = $row1['major_id'];
-  $minor_id = $row1['minor_id'];
-  
-  $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
-
-//check จำนวนแถวของสัปดาห์
-$sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-$result_init1 = mysqli_query($conn, $sql_init1);
-$num_row1 = mysqli_num_rows($result_init1);
-  // insert ลงตาราง homeroom 
-
-  if(!empty($_POST["submit"])  ){
+    INNER JOIN major as mj ON s.major_id = mj.major_code where s.user_id = '$user' ";
+    $result1 = mysqli_query($conn, $sql1);
+    $row_all = mysqli_num_rows($result1);
+    $row1 = mysqli_fetch_assoc($result1); // แผนกในที่ปรึกษา
+    $major_name = $row1['major_name'];
+    $major_id = $row1['major_id'];
+    $minor_id = $row1['minor_id'];
+     $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
+         $group_id = $row['group_id'];
+    //check จำนวนแถวของสัปดาห์
+    $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+    $result_init1 = mysqli_query($conn, $sql_init1);
+    $num_row1 = mysqli_num_rows($result_init1);
+    // insert ลงตาราง homeroom 
+    if(!empty($_POST["submit"])  ){
     // TODO
     //var_dump($_POST );
-
-    $check_array_student_id=$_POST['student_id'];
-    
+    $check_array_student_id=$_POST['student_id'];   
     $check_array_radio=$_POST['check_n'];
     echo "<br><br><hr>";
     var_dump('chek_radio_n=', $check_array_radio);
@@ -58,23 +50,11 @@ $num_row1 = mysqli_num_rows($result_init1);
     //print_r($check_array_radio);
     $cnt = count($_POST['check_n']);
     echo "cnt=".$cnt."<br>";
-    
-    // foreach($_POST['check_n'] as $key => $value){
-    //     if(in_array($_POST['check_n'][$key], $check_array_radio)){   
-    //         $check_ = $_POST['check_'][$key];
-    //         echo "inarray=".$check_;
-    //         $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'week','$student_id',NOW(),'$user','$major_id','minor_id','$group_id','$check_')";   
-    //         if ($conn->query($sql) === FALSE) {
-    //         //   echo "New record created successfully"
-    //         echo "Error: " . $sql . "<br>" . $conn->error;
-    //         }
-    //     }
-    // }   
     foreach($_POST['student_n'] as $key => $value){
             if(in_array($_POST['student_n'][$key], $check_array_student_id)){                   
             $student_id = $_POST['student_id'][$key]; 
             $check_ = $_POST['check_'][$key];       
-            $group_id = $_POST['group_id'];
+           // $group_id = $_POST['group_id'][$key];
             // check duplicate
             $sql2 = "SELECT * FROM home_room_check WHERE week_check = '$week' AND student_id='$student_id' ";
             $result2 = mysqli_query($conn, $sql2);
@@ -82,7 +62,7 @@ $num_row1 = mysqli_num_rows($result_init1);
             if($num_row > 0){
                 echo "บันทึกแล้ว";
             }else{
-            $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week','$student_id',NOW(),'$user','$major_id[$key]','minor_id','$group_id','$check_')";   
+            $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week','$student_id',NOW(),'$user','$major_id','minor_id','$group_id','$check_')";   
                 if ($conn->query($sql) === FALSE) {
                 //   echo "New record created successfully"
                 echo "Error: " . $sql . "<br>" . $conn->error;
@@ -91,39 +71,37 @@ $num_row1 = mysqli_num_rows($result_init1);
         } //end if in_array
     }// end foreach
 
-    // //ตรวจสอบ ข้อมูล ใน week นั้นๆ
-    // $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-    // $result_init = mysqli_query($conn, $sql_init);
-    // $num_row = mysqli_num_rows($result_init);
-    // //echo "<br>num_row=".$num_row."<br>";
-    // //var_dump("check_=",$_POST['check_']);
-    // //echo "<br>";
-    // //echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
-    //  if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
-    //  // echo "<script> alert('updatae'); </script>";
-    //     $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
-    //     if ($conn->query($sql_set) === TRUE) {
-    //     echo "Record updated successfully";
-    //     echo "<script>";
-    //     //echo "prev()";//ข้อมูลซ้ำ
-    //     echo "<
-    //     /script>";
-    //     } else {
-    //     echo "Error updating record: " . $conn->error;
-    //     }
-    // }
-
-   $conn->close();
- 
+    //ตรวจสอบ ข้อมูล ใน week นั้นๆ
+    $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+    $result_init = mysqli_query($conn, $sql_init);
+    $num_row = mysqli_num_rows($result_init);
+    //echo "<br>num_row=".$num_row."<br>";
+    //var_dump("check_=",$_POST['check_']);
+    //echo "<br>";
+    //echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
+     if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
+     // echo "<script> alert('updatae'); </script>";
+        $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
+        if ($conn->query($sql_set) === TRUE) {
+        echo "Record updated successfully";
+        echo "<script>";
+        //echo "prev()";//ข้อมูลซ้ำ
+        echo "<
+        /script>";
+        } else {
+        echo "Error updating record: " . $conn->error;
+        }
+    }
+    $conn->close();
 }
-  ?>
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ACTIVITY CTC Admin Manage Homeroom Activity</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
@@ -134,7 +112,7 @@ $num_row1 = mysqli_num_rows($result_init1);
         <link rel="stylesheet" href="css/main.css" media="screen" >    
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" />
         <script src="js/modernizr/modernizr.min.js"></script>
-          <style>
+        <style>
         .errorWrap {
     padding: 10px;
     margin: 0 0 20px 0;
@@ -152,7 +130,6 @@ $num_row1 = mysqli_num_rows($result_init1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
         </style>
-       
     </head>
 
 <body class="top-navbar-fixed">
