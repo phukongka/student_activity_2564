@@ -1,4 +1,4 @@
-<?php     
+<?php    
 	  include "includes/config.inc.php";
 		include "includes/config.inc.php";
 		if (!empty($_POST['login'])) {
