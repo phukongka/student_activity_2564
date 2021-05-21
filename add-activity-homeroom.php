@@ -1,42 +1,42 @@
 <?php
 session_start();
-error_reporting(0);
-include('includes/config.php');
-if(strlen($_SESSION['alogin'])=="")
-    {   
-    header("Location: index.php"); 
-    }
-    else{
-if(isset($_POST['submit']))
-{
-$studentname=$_POST['fullanme'];
-$roolid=$_POST['rollid']; 
-$studentemail=$_POST['emailid']; 
-$gender=$_POST['gender']; 
-$classid=$_POST['class']; 
-$dob=$_POST['dob']; 
-$status=1;
-$sql="INSERT INTO  tblstudents(StudentName,RollId,StudentEmail,Gender,ClassId,DOB,Status) VALUES(:studentname,:roolid,:studentemail,:gender,:classid,:dob,:status)";
-$query = $dbh->prepare($sql);
-$query->bindParam(':studentname',$studentname,PDO::PARAM_STR);
-$query->bindParam(':roolid',$roolid,PDO::PARAM_STR);
-$query->bindParam(':studentemail',$studentemail,PDO::PARAM_STR);
-$query->bindParam(':gender',$gender,PDO::PARAM_STR);
-$query->bindParam(':classid',$classid,PDO::PARAM_STR);
-$query->bindParam(':dob',$dob,PDO::PARAM_STR);
-$query->bindParam(':status',$status,PDO::PARAM_STR);
-$query->execute();
-$lastInsertId = $dbh->lastInsertId();
-if($lastInsertId)
-{
-$msg="Student info added successfully";
-}
-else 
-{
-$error="Something went wrong. Please try again";
-}
+//error_reporting(0);
+include('includes/config.inc.php');
+// if(strlen($_SESSION['alogin'])=="")
+//     {   
+//     header("Location: index.php"); 
+//     }
+//     else{
+// if(isset($_POST['submit']))
+// {
+// $studentname=$_POST['fullanme'];
+// $roolid=$_POST['rollid']; 
+// $studentemail=$_POST['emailid']; 
+// $gender=$_POST['gender']; 
+// $classid=$_POST['class']; 
+// $dob=$_POST['dob']; 
+// $status=1;
+// $sql="INSERT INTO  tblstudents(StudentName,RollId,StudentEmail,Gender,ClassId,DOB,Status) VALUES(:studentname,:roolid,:studentemail,:gender,:classid,:dob,:status)";
+// $query = $dbh->prepare($sql);
+// $query->bindParam(':studentname',$studentname,PDO::PARAM_STR);
+// $query->bindParam(':roolid',$roolid,PDO::PARAM_STR);
+// $query->bindParam(':studentemail',$studentemail,PDO::PARAM_STR);
+// $query->bindParam(':gender',$gender,PDO::PARAM_STR);
+// $query->bindParam(':classid',$classid,PDO::PARAM_STR);
+// $query->bindParam(':dob',$dob,PDO::PARAM_STR);
+// $query->bindParam(':status',$status,PDO::PARAM_STR);
+// $query->execute();
+// $lastInsertId = $dbh->lastInsertId();
+// if($lastInsertId)
+// {
+// $msg="Student info added successfully";
+// }
+// else 
+// {
+// $error="Something went wrong. Please try again";
+// }
 
-}
+//}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,8 +115,43 @@ $error="Something went wrong. Please try again";
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="active">
+                <?php  
+                  $status=array();
+                    // $step1 = "disabled";
+                if(!empty($_GET['step'])){
+                    $step = $_GET['step'];
+                    if($step == 1){
+                        $step1 = "active";
+                        $status=array(1,0,0);
+                       
+                    }else{
+                        $step1 = "disabled";
+                        
+                    }
+                    if($step == 2){
+                        $step2 = "active"; 
+                        var_dump($status);                    
+                        if($status[0] == 1){
+                        $status=array(1,1,0);
+                        echo "<br>step=".$status[1];
+                        }
+                    }else{
+                        $step2 = "disabled";
+                    }
+                    if($step == 3){
+                        $step3 = "active";
+                        $status=array(1,1,1);
+                    }else{
+                        $step3 = "disabled";
+                    }
+                    if($status[0] < 1){
+                       // var_dump($status);
+                       echo "<script>alert('over step')</script>" ;
+                    }
+                }
+                   
+                    ?>
+                    <li role="presentation" class="<?php echo $step1; ?>">
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
                                 <!-- <i class="glyphicon glyphicon-folder-open"></i> -->
@@ -124,16 +159,16 @@ $error="Something went wrong. Please try again";
                             </span>
                         </a>
                     </li>
-
-                    <li role="presentation" class="disabled">
+                   
+                    <li role="presentation" class="<?php echo $step2; ?>">
                         <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
                             <i class="glyphicon glyphicon-picture"></i>
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled">
-                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                    <li role="presentation" class="<?php echo $step3; ?>">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="<?php echo $step3; ?>">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-book"></i>                             
                             </span>
@@ -280,4 +315,4 @@ $error="Something went wrong. Please try again";
    
     </body>
 </html>
-<?PHP } ?>
+<?PHP // } ?>
