@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/config.inc.php');
-if(strlen($_SESSION['alogin'])=="")
+if(strlen($_SESSION['user_id'])=="")
     {
     header("Location: index.php");
     }
