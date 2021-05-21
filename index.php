@@ -1,6 +1,4 @@
-<?php
-   session_start();	
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
 </head>
 <body>
+   <?php include "alert.php"; ?>
 	<nav class="navbar navbar-expand-md navbar-dark">
 		<div class="container">
 			<a href="#" class="navbar-brand" style="font-size: 28px;"><strong>ระบบกิจกรรมนักเรียน นักศึกษา</strong></a>
@@ -47,11 +46,22 @@
 						</strong>
 					</div>
 					<div class="card-body">
-						<form method="post" action="">
+						<form method="post">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+								</div>
+										<input class="form-control" type="text" name="user_id" placeholder="รหัสครู"required>
+							</div><br>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-user"></i></span>
 								</div>
+										<select class="form-control" name="title">
+											<option>นาย</option>
+											<option>นาง</option>
+											<option>นางสาว</option>
+										</select>
 										<input class="form-control" type="text" name="user_name" placeholder="ชื่อ" required>
 										<input class="form-control" type="text" name="user_lastname" placeholder="นามสกุล" required>
 							</div><br>
@@ -67,27 +77,9 @@
 									</div>
 										<input class="form-control" type="text" name="user_email" placeholder="Email" required>
 								</div><br>
-								<div class="input-group border-5">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="fas fa-globe"></i></span>
-									</div>
-										<select class="form-control" name="user_country">
-											<option>Pakistan</option>
-											<option>Thailand</option>
-										</select>
-								</div><br>
-								<div class="input-group border-5">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="fas fa-venus-mars"></i></span>
-									</div>
-										<select class="form-control" name="user_gender">
-											<option>ชาย</option>
-											<option>หญิง</option>
-											<option>ไม่ระบุ</option>
-										</select>
-								</div><br>
+							
 								<button type="submit" name="reg" class="btn btn-info form-control">สมัคร</button>
-								<?php include("user-signup.php"); ?>
+								<?php include("user_signup.php"); ?>
 						</form>
 					</div>
 				</div>
@@ -104,12 +96,12 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 						<div class="modal-body">
-							<form method="post" action="#">
+							<form method="post">
 								<div class="input-group">
 									<div class="input-group-prepend">
 								      <span class="input-group-text"><i class="fas fa-envelope"></i></span>
 								    </div>
-									<input class="form-control" type="text" name="user_id" placeholder="Enter Email">
+									<input class="form-control" type="text" name="user_email" placeholder="Enter Email">
 								</div><br>
 								<div class="input-group">
 									<div class="input-group-prepend">
@@ -119,13 +111,11 @@
 								</div>
 						</div>
 					<div class="modal-footer">
-						<button type="submit" name="login" class="btn btn-block btn-info" value="login">Login</button>
+						<button type="submit" name="login" class="btn btn-block btn-info">Login</button>
 						<!-- <button class="btn btn-danger" data-dismiss="modal">Close</button> -->
 					</form>
 					</div>
-					<?php
-								include("login.php"); 
-					?>
+				    <?php include "login.php"; ?>
 				</div>
 			</div>
 		</div>
