@@ -1,8 +1,14 @@
-<?php 
+<?php
 session_start();
-include "includes/config.inc.php";
-$user_id = $_SESSION['user_id'];
-?>
+error_reporting(0);
+include('includes/config.inc.php');
+if(strlen($_SESSION['alogin'])=="")
+    {
+    header("Location: index.php");
+    }
+    else{
+        ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,18 +30,17 @@ $user_id = $_SESSION['user_id'];
     </head>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">
-              <?php include('includes/topbar.php');?>
+              <?php include('includes/topbar-user.php');?>
             <div class="content-wrapper">
                 <div class="content-container">
 
-                    <?php include('includes/leftbar.php');?>
+                    <?php include('includes/leftbar-user.php');?>
 
                     <div class="main-page">
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-sm-6">
-                                    <h2 class="title">Dashboard</h2>
-                                    <?php  echo $user_id; ?>
+                                    <h2 class="title">กิจกรรม HOMEROOM</h2>
                                 </div>
                                 <!-- /.col-sm-6 -->
                             </div>
@@ -46,11 +51,11 @@ $user_id = $_SESSION['user_id'];
 
                         <section class="section">
                             <div class="container-fluid">
-                                <div class="row">
+                                <div class="row">                            
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <a class="dashboard-stat bg-primary" href="manage-students.php">
-                                            <span class="number counter"><?php echo htmlentities($totalstudents);?></span>
-                                            <span class="name">Regd Users</span>
+                                            <span class="number counter"><?php echo "0";?></span>
+                                            <span class="name">ส่งตรงเวลา</span>
                                             <span class="bg-icon"><i class="fa fa-users"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
@@ -59,8 +64,8 @@ $user_id = $_SESSION['user_id'];
 
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <a class="dashboard-stat bg-danger" href="manage-subjects.php">
-                                            <span class="number counter"><?php echo htmlentities($totalsubjects);?></span>
-                                            <span class="name">Subjects Listed</span>
+                                            <span class="number counter"><?php echo "0";?></span>
+                                            <span class="name">จำนวนไม่ส่ง</span>
                                             <span class="bg-icon"><i class="fa fa-ticket"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
@@ -68,9 +73,9 @@ $user_id = $_SESSION['user_id'];
                                     <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-warning" href="manage-classes.php">           
-                                            <span class="number counter"><?php echo htmlentities($totalclasses);?></span>
-                                            <span class="name">Total classes listed</span>
+                                        <a class="dashboard-stat bg-warning" href="manage-classes.php">
+                                            <span class="number counter"><?php echo "0";?></span>
+                                            <span class="name">ส่งช้า</span>
                                             <span class="bg-icon"><i class="fa fa-bank"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
@@ -78,9 +83,9 @@ $user_id = $_SESSION['user_id'];
                                     <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
 
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-success" href="manage-results.php">                     
-                                            <span class="number counter"><?php echo htmlentities($totalresults);?></span>
-                                            <span class="name">Results Declared</span>
+                                        <a class="dashboard-stat bg-success" href="manage-results.php">
+                              <span class="number counter"><?php echo "0";?></span>
+                                            <span class="name">คิดเป็นร้อยละ</span>
                                             <span class="bg-icon"><i class="fa fa-file-text"></i></span>
                                         </a>
                                         <!-- /.dashboard-stat -->
@@ -93,6 +98,40 @@ $user_id = $_SESSION['user_id'];
                             <!-- /.container-fluid -->
                         </section>
                         <!-- /.section -->
+
+                        <div class="container-fluid">
+                            <div class="row page-title-div">
+                                <div class="col-sm-6">
+                                    <h2 class="title">กิจกรรม เข้าแถวหน้าเสาธง</h2>
+                                </div>
+                                <!-- /.col-sm-6 -->
+                            </div>
+                            <!-- /.row -->
+
+                        </div>
+                       
+                        <section class="section">
+                           -
+                        </section>
+                          <!-- /.้homeroom -->
+
+                         <div class="container-fluid">
+                            <div class="row page-title-div">
+                                <div class="col-sm-6">
+                                    <h2 class="title">กิจกรรม ออกเยี่ยมบ้าน</h2>
+                                </div>
+                                <!-- /.col-sm-6 -->
+                            </div>
+                            <section class="section">
+                           -
+                             </section>
+                              <!-- /.เยี่ยมบ้าน -->
+
+                            <!-- /.row -->
+
+                        </div>
+                         <!-- /.้homeroom -->
+
 
                     </div>
                     <!-- /.main-page -->
@@ -158,7 +197,7 @@ $user_id = $_SESSION['user_id'];
                   "showMethod": "fadeIn",
                   "hideMethod": "fadeOut"
                 }
-                toastr["success"]( "Welcome to Admin Management System!");
+                toastr["success"]( "Welcome to Activity Students Result Management System!");
 
             });
         </script>
@@ -170,4 +209,4 @@ $user_id = $_SESSION['user_id'];
 
 <style> .foot{text-align: center; */}</style>
 </html>
-
+<?php } ?>
