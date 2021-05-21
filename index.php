@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
 </head>
 <body>
-   <?php include "alert.php"; ?>
+   <?php include "includes/alert.php"; ?>
 	<nav class="navbar navbar-expand-md navbar-dark">
 		<div class="container">
 			<a href="#" class="navbar-brand" style="font-size: 28px;"><strong>ระบบกิจกรรมนักเรียน นักศึกษา</strong></a>
