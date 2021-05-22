@@ -1,6 +1,6 @@
 <?php 
 // session_start();
-include "includes/config.inc.php";
+// include "includes/config.inc.php";
 $user_id = $_SESSION['user_id'];
 $sql_bar = "SELECT * FROM general_user WHERE user_id = '$user_id'";
 $qu_bar = $conn->query($sql_bar);
@@ -9,6 +9,7 @@ $title =$row_bar['title'];
 $user_name =$row_bar['user_name'];
 $user_lastname = $row_bar['user_lastname'];
 ?>
+<script src="includes/sweetalert2.all.min.js"></script>
   <nav class="navbar top-navbar bg-white box-shadow">
             	<div class="container-fluid">
                     <div class="row">
@@ -46,19 +47,19 @@ $user_lastname = $row_bar['user_lastname'];
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                 
-								<!-- <li class="hidden-sm hidden-xs dropdown">
+								<li class="hidden-sm hidden-xs dropdown">
 									<a href="#" class="user-info-handle dropdown-toggle" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-plus"></i></a>
 									<div class="dropdown-menu" aria-labelledby="user">
 									<?php
 										$sql_request = "SELECT * FROM general_user WHERE user_status = 'request'";
 										$qu_request = $conn->query($sql_request);
 										while ($row_request = $qu_request->fetch_array()) {
-											$title =$row_request['title'];
-											$user_name =$row_request['user_name'];
-											$user_lastname = $row_request['user_lastname'];
+											$title_r =$row_request['title'];
+											$user_name_r =$row_request['user_name'];
+											$user_lastname_r = $row_request['user_lastname'];
 									?>
-											<div class="dropdown-item" style="padding: 10px; width: 350px;">
-												<?php echo "$title"." ".$user_name." ".$user_lastname; ?>
+											<div class="dropdown-item" style="padding: 10px 10px 15px 10px; width: 350px;">
+												<?php echo "$title_r"." ".$user_name_r." ".$user_lastname_r; ?>
 												<button class="pull-right btn">อนุมัติ</button>
 											</div>
 									<?php
@@ -66,9 +67,27 @@ $user_lastname = $row_bar['user_lastname'];
 									?>
 										
 									</div>
-								</li> -->
+								</li>
 
-                				    <li><a href="logout.php" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
+                				    <li>
+										<a onclick="LogoutConfirm()" class="color-danger text-center"><i class="fa fa-sign-out"></i> Logout</a>
+										<script>
+											function LogoutConfirm(){
+												Swal.fire({
+													icon: 'warning',
+													title: 'Log out',
+													text: 'Are you sure you want to logout?',
+													showConfirmButton: true,
+													showCancelButton: true,
+													confirmButtonText: 'Log out'
+												}).then((result) => {
+													if (result.isConfirmed) {
+														window.open("logout.php","_self");
+													}
+												})
+											}
+										</script>
+									</li>
                 					
 
                             

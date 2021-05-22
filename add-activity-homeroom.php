@@ -1,7 +1,8 @@
 <?php
 session_start();
-//error_reporting(0);
+// error_reporting(0);
 include('includes/config.inc.php');
+// include('includes/config.php');
 // if(strlen($_SESSION['alogin'])=="")
 //     {   
 //     header("Location: index.php"); 
@@ -36,7 +37,7 @@ include('includes/config.inc.php');
 // $error="Something went wrong. Please try again";
 // }
 
-//}
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +46,8 @@ include('includes/config.inc.php');
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ACTIVITY CTC System | Add activity</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
         <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
@@ -100,13 +103,13 @@ include('includes/config.inc.php');
                         <div class="row">
                                     <div class="col-md-12">
                                         <div class="panel">
-                                            <div class="panel-heading">
+                                            <!-- <div class="panel-heading">
                                                 <div class="panel-title">
                                                 <h3>แบบบันทึกรายงาน การปฏิบัติงานของครูที่ปรึกษา</h3>
                                                 <p>สัปดาห์ที่ ............  วันที่ ........... เดือน ................... พ.ศ. .............</p>
                                                     <h5>** กรุณาบันทึกข้อมูลให้ครบ ทั้งหมด 3 Step **</h5>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                         <div class="panel-body">                   
                                         <div class="row">
@@ -115,43 +118,8 @@ include('includes/config.inc.php');
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
-                <?php  
-                  $status=array();
-                    // $step1 = "disabled";
-                if(!empty($_GET['step'])){
-                    $step = $_GET['step'];
-                    if($step == 1){
-                        $step1 = "active";
-                        $status=array(1,0,0);
-                       
-                    }else{
-                        $step1 = "disabled";
-                        
-                    }
-                    if($step == 2){
-                        $step2 = "active"; 
-                        var_dump($status);                    
-                        if($status[0] == 1){
-                        $status=array(1,1,0);
-                        echo "<br>step=".$status[1];
-                        }
-                    }else{
-                        $step2 = "disabled";
-                    }
-                    if($step == 3){
-                        $step3 = "active";
-                        $status=array(1,1,1);
-                    }else{
-                        $step3 = "disabled";
-                    }
-                    if($status[0] < 1){
-                       // var_dump($status);
-                       echo "<script>alert('over step')</script>" ;
-                    }
-                }
-                   
-                    ?>
-                    <li role="presentation" class="<?php echo $step1; ?>">
+
+                    <li role="presentation" class="active">
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
                                 <!-- <i class="glyphicon glyphicon-folder-open"></i> -->
@@ -159,16 +127,16 @@ include('includes/config.inc.php');
                             </span>
                         </a>
                     </li>
-                   
-                    <li role="presentation" class="<?php echo $step2; ?>">
+
+                    <li role="presentation" class="disabled">
                         <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
                             <i class="glyphicon glyphicon-picture"></i>
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="<?php echo $step3; ?>">
-                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="<?php echo $step3; ?>">
+                    <li role="presentation" class="disabled">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-book"></i>                             
                             </span>
@@ -185,21 +153,28 @@ include('includes/config.inc.php');
                 </ul>
             </div>
 
-            <form role="form"  method="post">
+            <!-- <form role="form"  method="post"> -->
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="step1">
                         <h3>Step 1</h3>
-                        <p>เรื่องที่ให้คำแนะนำ นักเรียน นักศึกษา</p>                      
-                            <div class="form-group">
+                        <p>เช็คชื่อเข้าร่วม กิจกรรมโฮมรูม สัปดาห์ที่.1.. สาขาวิชา...เทคโนโลยีสารสนเทศ อาจารย์ที่ปรึกษา กฤษณา</p>                      
+                            <!-- <div class="form-group">
                               <label for=""></label>
                               <textarea class="form-control" name="" id="" rows="3"></textarea>
                             </div>
                             <b>เรื่องแบบประเมินตนเอง สำหรับนักเรียน นักศึกษา โดยผ่านการสแกน QR-Code เพื่อเป็นการเฝ้าระวังและป้องกันการแพร่เชื่อระบาดของโรคโควิด-19 
                             <br>(2 สัปดาห์ ทำ 1 ครั้ง)</b><br>
-                            <p>จำนวนนักเรียน นักศึกษาทั้งหมด ...... คน ทำแบบประเมิน ...... คน ไม่ทำแบบประเมิน ..... คน</p>
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                        </ul>
+                            <p>จำนวนนักเรียน นักศึกษาทั้งหมด ...... คน ทำแบบประเมิน ...... คน ไม่ทำแบบประเมิน ..... คน</p> -->
+                            <form id="step1_form" method="post">
+                                <?php include "add-students-homeroom.php"; ?>
+                            </form>
+                            
+                            
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                </ul>
+                            
+
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
                         <h3>Step 2</h3>     
@@ -233,7 +208,7 @@ include('includes/config.inc.php');
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </form>
+            <!-- </form> -->
         </div>
     </section>
    </div>  
@@ -262,7 +237,27 @@ include('includes/config.inc.php');
         <script src="js/iscroll/iscroll.js"></script>
         <script src="js/prism/prism.js"></script>
         <script src="js/select2/select2.min.js"></script>
+        <script src="js/DataTables/datatables.min.js"></script>
         <script src="js/main.js"></script>
+        
+        <script>
+            $(function($) {
+                $('#example').DataTable({
+                    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                    "iDisplayLength": 10
+                });
+
+                $('#example2').DataTable( {
+                    "scrollY":        "300px",
+                    "scrollCollapse": true,
+                    "paging":         false
+                } );
+
+                $('#example3').DataTable();
+            });
+        </script>
+
+        
         
         <script>
             $(document).ready(function () {
