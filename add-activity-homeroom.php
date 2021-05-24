@@ -1,6 +1,6 @@
 <?php
 session_start();
-// error_reporting(0);
+error_reporting(0);
 include('includes/config.inc.php');
 // include('includes/config.php');
 // if(strlen($_SESSION['alogin'])=="")
@@ -167,39 +167,52 @@ include('includes/config.inc.php');
                             <p>จำนวนนักเรียน นักศึกษาทั้งหมด ...... คน ทำแบบประเมิน ...... คน ไม่ทำแบบประเมิน ..... คน</p> -->
                             <form id="step1_form" method="post">
                                 <?php include "add-students-homeroom.php"; ?>
-                            </form>
+                            
                             
                             
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
                                 </ul>
+                            </form>
+                            
                             
 
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
                         <h3>Step 2</h3>     
-                        <p>รูปภาพ ขณะให้คำแนะนำ นักเรียน นักศึกษา</p>  
+                        <!-- <p>รูปภาพ ขณะให้คำแนะนำ นักเรียน นักศึกษา</p>  
                         <div class="input-group">
                           <input class="btn btn-info btn-sm" type="file" name="file_pic[]" multiple="multiple">                     
-                        </div> 
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                        </ul>
+                        </div>  -->
+                        <form id="step2_form" method="post" action="obed-process.php" method="POST" onsubmit="JavaScript:return fncSubmit" enctype="multipart/form-data">
+                            <?php include "add-obedience-st2.php"; ?>
+                           
+
+                            <ul class="list-inline pull-right">
+                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                            </ul>
+                        </form>
+
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
                         <h3>Step 3</h3>
                         <p>แจ้งรายชื่อนักเรียน นักศึกษา ที่มีปัญหาให้ผู้ปกครงได้รับทราบ (เรื่องที่แจ้ง เช่น กิจกรรมเข้าแถว/กิจกรรมโฮมรูม/การไม่เข้าร่วมกิจกรร/การขาดเรียน/ความประพฤติ
                         หรือ เรื่องอื่น ๆ ที่ต้องการแจ้งให้ผู้ปกครองได้รับทราบ )</p>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                               <label for=""></label>
                               <textarea class="form-control" name="" id="" rows="3"></textarea>
-                            </div>
-                        <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                        </ul>
+                            </div> -->
+                            <form id="step3_form" method="post">
+                                <?php include "add-manage-advisor-risk.php"; ?>
+                            
+
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                    <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                </ul>
+                            </form>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <h3>Complete</h3>
@@ -253,7 +266,10 @@ include('includes/config.inc.php');
                     "paging":         false
                 } );
 
-                $('#example3').DataTable();
+                $('#example3').DataTable({
+                    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                    "iDisplayLength": 10
+                });
             });
         </script>
 

@@ -149,7 +149,7 @@ include('includes/config.inc.php');
                                                         <?php
                                                         if($active_status > 0){  // check status_active
                                                         ?>    
-                                                            <td style="background-color:MediumSeaGreen;"><a href="manage-students-homeroom.php?week=<?php echo $week ?>" ><?php echo $status;?></a></td>                             
+                                                            <td style="background-color:MediumSeaGreen;"><a href="add-activity-homeroom.php?week=<?php echo $week ?>" ><?php echo $status;?></a></td>                             
                                                       <?php
                                                       }else{
                                                       ?>  
