@@ -4,10 +4,11 @@
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM general_user WHERE user_id = '$user_id'";
 $qu = $conn->query($sql);
-$row_name = $qu->fetch_array();
+$row = $qu->fetch_array();
 $title =$row['title'];
 $user_name =$row['user_name'];
 $user_lastname = $row['user_lastname'];
+
 ?>
 <script src="includes/sweetalert2.all.min.js"></script>
   <nav class="navbar top-navbar bg-white box-shadow">

@@ -2,42 +2,9 @@
 session_start();
 error_reporting(0);
 include('includes/config.inc.php');
-// include('includes/config.php');
-// if(strlen($_SESSION['alogin'])=="")
-//     {   
-//     header("Location: index.php"); 
-//     }
-//     else{
-// if(isset($_POST['submit']))
-// {
-// $studentname=$_POST['fullanme'];
-// $roolid=$_POST['rollid']; 
-// $studentemail=$_POST['emailid']; 
-// $gender=$_POST['gender']; 
-// $classid=$_POST['class']; 
-// $dob=$_POST['dob']; 
-// $status=1;
-// $sql="INSERT INTO  tblstudents(StudentName,RollId,StudentEmail,Gender,ClassId,DOB,Status) VALUES(:studentname,:roolid,:studentemail,:gender,:classid,:dob,:status)";
-// $query = $dbh->prepare($sql);
-// $query->bindParam(':studentname',$studentname,PDO::PARAM_STR);
-// $query->bindParam(':roolid',$roolid,PDO::PARAM_STR);
-// $query->bindParam(':studentemail',$studentemail,PDO::PARAM_STR);
-// $query->bindParam(':gender',$gender,PDO::PARAM_STR);
-// $query->bindParam(':classid',$classid,PDO::PARAM_STR);
-// $query->bindParam(':dob',$dob,PDO::PARAM_STR);
-// $query->bindParam(':status',$status,PDO::PARAM_STR);
-// $query->execute();
-// $lastInsertId = $dbh->lastInsertId();
-// if($lastInsertId)
-// {
-// $msg="Student info added successfully";
-// }
-// else 
-// {
-// $error="Something went wrong. Please try again";
-// }
+$week = $_SESSION["week_number"] ; 
 
-// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,13 +28,13 @@ include('includes/config.inc.php');
     </head>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">
-
-            <!-- ========== TOP NAVBAR ========== -->
+            <!-- ========== TOP NAVBAR ========== -->            
             <?php include('includes/topbar-user.php');?>
+            
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-
+               
                     <!-- ========== LEFT SIDEBAR ========== -->
                     <?php include('includes/leftbar-user.php');?>
                     <!-- /.left-sidebar -->
@@ -75,12 +42,11 @@ include('includes/config.inc.php');
                     <div class="main-page">
 
                      <div class="container-fluid">
+
                             <div class="row page-title-div">
                                 <div class="col-md-6">
-                                    <h2 class="title">Save Activity Homeroom</h2>
-                                
+                                    <h2 class="title">Save Activity Homeroom </h2>                               
                                 </div>
-                                
                                 <!-- /.col-md-6 text-right -->
                             </div>
                             <!-- /.row -->
@@ -120,7 +86,7 @@ include('includes/config.inc.php');
                 <ul class="nav nav-tabs" role="tablist">
 
                     <li role="presentation" class="active">
-                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step1">
                             <span class="round-tab">
                                 <!-- <i class="glyphicon glyphicon-folder-open"></i> -->
                                 <i class="glyphicon glyphicon-pencil"></i>
@@ -157,7 +123,7 @@ include('includes/config.inc.php');
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="step1">
                         <h3>Step 1</h3>
-                        <p>เช็คชื่อเข้าร่วม กิจกรรมโฮมรูม สัปดาห์ที่.1.. สาขาวิชา...เทคโนโลยีสารสนเทศ อาจารย์ที่ปรึกษา กฤษณา</p>                      
+                        <p>เช็คชื่อเข้าร่วม กิจกรรมโฮมรูม สัปดาห์ที่ <?php echo $week; ?>. สาขาวิชา...เทคโนโลยีสารสนเทศ อาจารย์ที่ปรึกษา <?php echo $user_name;?></p>                      
                             <!-- <div class="form-group">
                               <label for=""></label>
                               <textarea class="form-control" name="" id="" rows="3"></textarea>
@@ -166,20 +132,21 @@ include('includes/config.inc.php');
                             <br>(2 สัปดาห์ ทำ 1 ครั้ง)</b><br>
                             <p>จำนวนนักเรียน นักศึกษาทั้งหมด ...... คน ทำแบบประเมิน ...... คน ไม่ทำแบบประเมิน ..... คน</p> -->
                             <form id="step1_form" method="post">
-                                <?php include "add-students-homeroom.php"; ?>
-                            
-                            
-                            
+                                <?php 
+                                include "add-students-homeroom.php";
+                                echo "num_row=".$num_row_week."==row_all".$row_all;
+                                echo "<br>user_ID=".$_SESSION['user_id'];
+                                echo "<br>step2=".$_SESSION['step22'];
+
+                                ?>                          
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
                                 </ul>
                             </form>
-                            
-                            
-
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
-                        <h3>Step 2</h3>     
+                        <h3>Step 2 <?php echo "<br>step24=".$_SESSION['step22'];  ?></h3>     
+                        
                         <!-- <p>รูปภาพ ขณะให้คำแนะนำ นักเรียน นักศึกษา</p>  
                         <div class="input-group">
                           <input class="btn btn-info btn-sm" type="file" name="file_pic[]" multiple="multiple">                     
@@ -259,57 +226,53 @@ include('includes/config.inc.php');
                     "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                     "iDisplayLength": 10
                 });
-
                 $('#example2').DataTable( {
                     "scrollY":        "300px",
                     "scrollCollapse": true,
                     "paging":         false
                 } );
-
                 $('#example3').DataTable({
                     "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                     "iDisplayLength": 10
                 });
             });
         </script>
-
-        
         
         <script>
             $(document).ready(function () {
                 //Initialize tooltips
-                $('.nav-tabs > li a[title]').tooltip();
-                
+               // alert('ok');
+                $('.nav-tabs > li a[title]').tooltip();                 
                 //Wizard
-                $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-                    var $target = $(e.target);
-                
-                    if ($target.parent().hasClass('disabled')) {
+                $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {                        
+                    var $target = $(e.target);                
+                    if ($target.parent().hasClass('disabled')) {                    
                         return false;
                     }
                 });
 
                 $(".next-step").click(function (e) {
-
+                    console.log('\ne=',e);
                     var $active = $('.wizard .nav-tabs li.active');
+                    console.log('\nactive=',$active);
                     $active.next().removeClass('disabled');
                     nextTab($active);
-
                 });
                 $(".prev-step").click(function (e) {
-
                     var $active = $('.wizard .nav-tabs li.active');
+               //     console.log($active);
                     prevTab($active);
 
                 });
             });
-
             function nextTab(elem) {
-                $(elem).next().find('a[data-toggle="tab"]').click();
+                
+                var ne = $(elem).next().find('a[data-toggle="tab"]').click();
+                console.log('\nnext=',ne);
             }
             function prevTab(elem) {
-                $(elem).prev().find('a[data-toggle="tab"]').click();
+                var re = $(elem).prev().find('a[data-toggle="tab"]').click();
+                console.log('\nre=',re)
             }
         </script>
         <script>

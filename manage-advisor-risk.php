@@ -56,6 +56,7 @@ if(!empty($_POST["submit"])  ){
                 //   echo "New record created successfully"
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 }
+                $_SESSION['step3'] = 1;
             }
         } //end if in_array
     }// end foreach

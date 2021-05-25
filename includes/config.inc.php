@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "oak_123456";
 $dbname = "advisor_ctc";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$dbname);

@@ -5,8 +5,7 @@
     $_SESSION["week_number"] = $_GET['week'];
     $week = $_SESSION["week_number"];
     }
-    $user=$_SESSION['user'];
-
+    $user=$_SESSION['user_id'];
 ?>
     <script>
     function prev(){
@@ -15,8 +14,8 @@
     }
     </script>
 <?php
-    $user = '7071003';
-    $_SESSION['user'] = $user;
+//  query  แสดงนักเรียนในที่ปรึกษา
+    $user = $_SESSION['user'];
     $sql = "SELECT * FROM general_user as u 
                 INNER JOIN student_group as sg ON u.user_id = sg.user_id  
                 INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = '$user' ";
@@ -37,7 +36,7 @@
     //check จำนวนแถวของสัปดาห์
     $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
     $result_init1 = mysqli_query($conn, $sql_init1);
-    $num_row1 = mysqli_num_rows($result_init1);
+    $num_row_week = mysqli_num_rows($result_init1);
     // insert ลงตาราง homeroom 
     if(!empty($_POST["submit"])  ){
     // TODO
@@ -78,9 +77,10 @@
     //echo "<br>num_row=".$num_row."<br>";
     //var_dump("check_=",$_POST['check_']);
     //echo "<br>";
-    //echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
+    //echo "num_row1=".$num_row_week."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
      if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
      // echo "<script> alert('updatae'); </script>";
+        $_SESSION['step1'] = 1;
         $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
         if ($conn->query($sql_set) === TRUE) {
         echo "Record updated successfully";
@@ -142,9 +142,8 @@
 <?php
   $no = 0; // ตัวแปรสำหรับ ตรวจสอบ ขาด ลา มาสาย
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
-  $number= 0; //  ลำดับ
+  $number = 1; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
-   $number++;
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];

@@ -5,7 +5,7 @@
     $_SESSION["week_number"] = $_GET['week'];
     $week = $_SESSION["week_number"];
     }
-    $user=$_SESSION['user'];
+    $user=$_SESSION['user_id'];
 
 ?>
     <script>
@@ -15,8 +15,6 @@
     }
     </script>
 <?php
-    $user = '7071003';
-    $_SESSION['user'] = $user;
     $sql = "SELECT * FROM general_user as u 
                 INNER JOIN student_group as sg ON u.user_id = sg.user_id  
                 INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = '$user' ";
