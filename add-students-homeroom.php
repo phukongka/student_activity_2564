@@ -6,6 +6,11 @@
     $week = $_SESSION["week_number"];
     }
     $user=$_SESSION['user_id'];
+
+//     $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+// $result_init = mysqli_query($conn, $sql_init);
+// $num_row2 = mysqli_num_rows($result_init);
+
 ?>
     <script>
     function prev(){
@@ -14,19 +19,19 @@
     }
     </script>
 <?php
-//  query  แสดงนักเรียนในที่ปรึกษา
-    $user = $_SESSION['user'];
     $sql = "SELECT * FROM general_user as u 
                 INNER JOIN student_group as sg ON u.user_id = sg.user_id  
                 INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = '$user' ";
     $result = mysqli_query($conn, $sql);
+    $row_all = mysqli_num_rows($result);
 
   ////////////////////////
   //no loop ดึงข้อมูลแสดงส่วนหัวของตาราง
   $sql1 = "SELECT * FROM student as s 
     INNER JOIN major as mj ON s.major_id = mj.major_code where s.user_id = '$user' ";
     $result1 = mysqli_query($conn, $sql1);
-    $row_all = mysqli_num_rows($result1);
+    // $row_all = mysqli_num_rows($result1);
+
     $row1 = mysqli_fetch_assoc($result1); // แผนกในที่ปรึกษา
     $major_name = $row1['major_name'];
     $major_id = $row1['major_id'];
@@ -34,21 +39,21 @@
      $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
          $group_id = $row['group_id'];
     //check จำนวนแถวของสัปดาห์
-    $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-    $result_init1 = mysqli_query($conn, $sql_init1);
-    $num_row_week = mysqli_num_rows($result_init1);
+    // $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+    // $result_init1 = mysqli_query($conn, $sql_init1);
+    // $num_row1 = mysqli_num_rows($result_init1);
     // insert ลงตาราง homeroom 
     if(!empty($_POST["submit"])  ){
     // TODO
     //var_dump($_POST );
     $check_array_student_id=$_POST['student_id'];   
     $check_array_radio=$_POST['check_n'];
-    echo "<br><br><hr>";
-    var_dump('chek_radio_n=', $check_array_radio);
-    echo "<br><br><hr>";
+    // echo "<br><br><hr>";
+    // var_dump('chek_radio_n=', $check_array_radio);
+    // echo "<br><br><hr>";
     //print_r($check_array_radio);
     $cnt = count($_POST['check_n']);
-    echo "cnt=".$cnt."<br>";
+    // echo "cnt=".$cnt."<br>";
     foreach($_POST['student_n'] as $key => $value){
             if(in_array($_POST['student_n'][$key], $check_array_student_id)){                   
             $student_id = $_POST['student_id'][$key]; 
@@ -59,7 +64,7 @@
             $result2 = mysqli_query($conn, $sql2);
             $num_row = mysqli_num_rows($result2);
             if($num_row > 0){
-                echo "บันทึกแล้ว";
+                // echo "บันทึกแล้ว";
             }else{
             $sql = "INSERT INTO home_room_check VALUES ('', '1', 'h001', NOW(),'$week','$student_id',NOW(),'$user','$major_id','minor_id','$group_id','$check_')";   
                 if ($conn->query($sql) === FALSE) {
@@ -73,28 +78,99 @@
     //ตรวจสอบ ข้อมูล ใน week นั้นๆ
     $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
     $result_init = mysqli_query($conn, $sql_init);
-    $num_row = mysqli_num_rows($result_init);
+    $num_row2 = mysqli_num_rows($result_init);
     //echo "<br>num_row=".$num_row."<br>";
     //var_dump("check_=",$_POST['check_']);
     //echo "<br>";
-    //echo "num_row1=".$num_row_week."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
-     if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
-     // echo "<script> alert('updatae'); </script>";
-        $_SESSION['step1'] = 1;
+    // echo "num_row1=".$num_row."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
+     if($num_row2 == ($row_all - 1)){ // เริ่มนับต่างกัน
+    //  echo "<script> alert('updatae'); </script>";
         $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
         if ($conn->query($sql_set) === TRUE) {
-        echo "Record updated successfully";
-        echo "<script>";
-        //echo "prev()";//ข้อมูลซ้ำ
-        echo "<
-        /script>";
+        // echo "Record updated successfully";
+        // echo "<script>";
+        // echo "prev()";//ข้อมูลซ้ำ
+        // echo "<
+        // /script>";
         } else {
         echo "Error updating record: " . $conn->error;
         }
     }
-    $conn->close();
+    // $conn->close();
 }
     ?>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ACTIVITY CTC Admin Manage Homeroom Activity</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" >
+        <link rel="stylesheet" href="css/font-awesome.min.css" media="screen" >
+        <link rel="stylesheet" href="css/animate-css/animate.min.css" media="screen" >
+        <link rel="stylesheet" href="css/lobipanel/lobipanel.min.css" media="screen" >
+        <link rel="stylesheet" href="css/prism/prism.css" media="screen" >
+        <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
+        <link rel="stylesheet" href="css/main.css" media="screen" >    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css" />
+        <script src="js/modernizr/modernizr.min.js"></script> -->
+        <!-- <style>
+        .errorWrap {
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #dd3d36;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.succWrap{
+    padding: 10px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    border-left: 4px solid #5cb85c;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+        </style> -->
+    <!-- </head> -->
+
+<!-- <body class="top-navbar-fixed">
+
+  <div class="main-wrapper"> -->
+
+            <!-- ========== TOP NAVBAR ========== -->
+   <?php //include('includes/topbar.php');?> 
+            <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
+            <!-- <div class="content-wrapper">
+                <div class="content-container"> -->
+   <?php //include('includes/leftbar-user.php');?>  
+
+                    <!-- <div class="main-page">
+                        <div class="container-fluid">
+                            <div class="row page-title-div">
+                                <div class="col-md-6">
+                                    <h2 class="title">Manage Students Homeroom Activity</h2>
+                                
+                                </div> -->
+                                
+                                <!-- /.col-md-6 text-right -->
+                            <!-- </div> -->
+                            <!-- /.row -->
+                            <!-- <div class="row breadcrumb-div">
+                                <div class="col-md-6">
+                                    <ul class="breadcrumb">
+            							<li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
+                                        <li>กิจกรรมโฮมรูม</li>
+            							<li class="active">เช็คชื่อเข้าร่วมกิจกรรมโฮมรูม</li>
+            						</ul>
+                                </div>
+                             
+                            </div> -->
+                            <!-- /.row -->
+                        <!-- </div> -->
+                        <!-- /.container-fluid -->
 
                         <!-- <section class="section">
                             <div class="container-fluid">
@@ -102,19 +178,27 @@
                        
    
                             </div> -->
-                            <!-- <form action="" method="POST" > -->
-                                 <!-- <div class="row">
-                                    <div class="col-md-12"> -->
+                            <?php
 
-                                        <!-- <div class="panel">
+// $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+// $result_init = mysqli_query($conn, $sql_init);
+// $num_row2 = mysqli_num_rows($result_init);
+                            
+                            // echo "row all = ".$row_all." row =";
+                            //         echo $num_row2;?>
+                            <form action="" method="POST" >
+                                <!-- <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
                                                  <h5>เช็คชื่อเข้าร่วม  กิจกรรมโฮมรูม สัปดาห์ที่.<?php echo $_SESSION["week_number"]  ?>.. สาขาวิชา...<?php echo $row1['major_name']?> อาจารย์ที่ปรึกษา  <?php echo $row['user_name'];?></h5>
                                                 </div>
-                                            </div>  
-                                            <div class="panel-body p-20"> -->
+                                            </div>   -->
+                                            <!-- <div class="panel-body p-20"> -->
 
-                                            <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+                                                <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -142,8 +226,9 @@
 <?php
   $no = 0; // ตัวแปรสำหรับ ตรวจสอบ ขาด ลา มาสาย
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
-  $number = 1; //  ลำดับ
+  $number= 1; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
+//    $number++;
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];
@@ -212,8 +297,8 @@
         
                         </tbody>
                         </table>
-                        <!-- <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" /> -->
-                    <!-- </form>                                          -->
+                        <input type="submit" name="submit" class="btn btn-sm btn-info" value="บันทึก" />
+                    </form>                                         
                     <!-- </body> -->
 
                     <!-- /.col-md-12 -->
@@ -224,8 +309,8 @@
         <!-- /.col-md-6 -->                         
                                 <!-- </div> -->
                                 <!-- /.col-md-12 -->
-                            <!-- </div> -->
-                        <!-- </div> -->
+                            <!-- </div>
+                        </div> -->
                         <!-- /.panel -->
                     <!-- </div> -->
                     <!-- /.col-md-6 -->
@@ -238,9 +323,27 @@
         <!-- </section> -->
         <!-- /.section -->
 
+    <!-- </div> -->
+    <!-- /.main-page -->
+
+            
+
+        <!-- </div> -->
+        <!-- /.content-container -->
+    <!-- </div> -->
+    <!-- /.content-wrapper -->
+
+    <!-- </div> -->
       
-        
-        <!-- <script>
+        <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <script src="js/bootstrap/bootstrap.min.js"></script>
+        <script src="js/pace/pace.min.js"></script>
+        <script src="js/lobipanel/lobipanel.min.js"></script>
+        <script src="js/iscroll/iscroll.js"></script>
+        <script src="js/prism/prism.js"></script>
+        <script src="js/DataTables/datatables.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
             $(function($) {
                 $('#example').DataTable();
 
@@ -253,3 +356,6 @@
                 $('#example3').DataTable();
             });
         </script> -->
+
+<!-- </html> -->
+
