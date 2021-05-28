@@ -1,6 +1,6 @@
 <?php 
 // session_start();
-// include "includes/config.inc.php";
+include "includes/config.inc.php";
 $user_id = $_SESSION['user_id'];
 $sql_bar = "SELECT * FROM general_user WHERE user_id = '$user_id'";
 $qu_bar = $conn->query($sql_bar);

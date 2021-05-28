@@ -7,6 +7,10 @@
     }
     $user=$_SESSION['user_id'];
 
+    $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+$result_init = mysqli_query($conn, $sql_init);
+$num_row2 = mysqli_num_rows($result_init);
+
 ?>
     <script>
     function prev(){
@@ -19,13 +23,15 @@
                 INNER JOIN student_group as sg ON u.user_id = sg.user_id  
                 INNER JOIN student as s ON s.group_id = sg.group_id where u.user_id = '$user' ";
     $result = mysqli_query($conn, $sql);
+    $row_all = mysqli_num_rows($result);
 
   ////////////////////////
   //no loop ดึงข้อมูลแสดงส่วนหัวของตาราง
   $sql1 = "SELECT * FROM student as s 
     INNER JOIN major as mj ON s.major_id = mj.major_code where s.user_id = '$user' ";
     $result1 = mysqli_query($conn, $sql1);
-    $row_all = mysqli_num_rows($result1);
+    // $row_all = mysqli_num_rows($result1);
+
     $row1 = mysqli_fetch_assoc($result1); // แผนกในที่ปรึกษา
     $major_name = $row1['major_name'];
     $major_id = $row1['major_id'];
@@ -33,9 +39,9 @@
      $row = mysqli_fetch_assoc($result); // ดึงอาจารย์ทีปรึกษา
          $group_id = $row['group_id'];
     //check จำนวนแถวของสัปดาห์
-    $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-    $result_init1 = mysqli_query($conn, $sql_init1);
-    $num_row1 = mysqli_num_rows($result_init1);
+    // $sql_init1 = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+    // $result_init1 = mysqli_query($conn, $sql_init1);
+    // $num_row1 = mysqli_num_rows($result_init1);
     // insert ลงตาราง homeroom 
     if(!empty($_POST["submit"])  ){
     // TODO
@@ -70,15 +76,15 @@
     }// end foreach
 
     //ตรวจสอบ ข้อมูล ใน week นั้นๆ
-    $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
-    $result_init = mysqli_query($conn, $sql_init);
-    $num_row = mysqli_num_rows($result_init);
+    // $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+    // $result_init = mysqli_query($conn, $sql_init);
+    // $num_row2 = mysqli_num_rows($result_init);
     //echo "<br>num_row=".$num_row."<br>";
     //var_dump("check_=",$_POST['check_']);
     //echo "<br>";
-    //echo "num_row1=".$num_row1."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
-     if($num_row == ($row_all - 1)){ // เริ่มนับต่างกัน
-     // echo "<script> alert('updatae'); </script>";
+    echo "num_row1=".$num_row."<br>";//จำนวนแถวของสัปดาห์ นั้นๆ
+     if($num_row2 == ($row_all - 1)){ // เริ่มนับต่างกัน
+     echo "<script> alert('updatae'); </script>";
         $sql_set = "UPDATE home_room_class SET active_status = 2 WHERE week='$week'";
         if ($conn->query($sql_set) === TRUE) {
         echo "Record updated successfully";
@@ -135,11 +141,11 @@
   <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->
-   <?php include('includes/topbar.php');?> 
+   <?php //include('includes/topbar.php');?> 
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">
-   <?php include('includes/leftbar-user.php');?>  
+   <?php //include('includes/leftbar-user.php');?>  
 
                     <div class="main-page">
                         <div class="container-fluid">
@@ -172,6 +178,14 @@
                        
    
                             </div>
+                            <?php
+
+// $sql_init = "SELECT * FROM home_room_check WHERE week_check = '$week' ";
+// $result_init = mysqli_query($conn, $sql_init);
+// $num_row2 = mysqli_num_rows($result_init);
+                            
+                            echo "row all = ".$row_all." row =";
+                                    echo $num_row2;?>
                             <form action="" method="POST" >
                                 <div class="row">
                                     <div class="col-md-12">
@@ -212,9 +226,9 @@
 <?php
   $no = 0; // ตัวแปรสำหรับ ตรวจสอบ ขาด ลา มาสาย
   $id = 0; // for เพิ่มเพื่อชื่อไม่ซ้ำกัน
-  $number= 0; //  ลำดับ
+  $number= 1; //  ลำดับ
   while($row = mysqli_fetch_assoc($result)) {  // start while
-   $number++;
+//    $number++;
    $student_id = $row['student_id'];
    $prefix = $row['prefix'];
    $std_name = $row['std_name'];

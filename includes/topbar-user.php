@@ -8,7 +8,6 @@ $row = $qu->fetch_array();
 $title =$row['title'];
 $user_name =$row['user_name'];
 $user_lastname = $row['user_lastname'];
-
 ?>
 <script src="includes/sweetalert2.all.min.js"></script>
   <nav class="navbar top-navbar bg-white box-shadow">

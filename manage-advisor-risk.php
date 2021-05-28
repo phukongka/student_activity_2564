@@ -106,7 +106,7 @@ if(!empty($_POST["submit"])  ){
   <div class="main-wrapper">
 
             <!-- ========== TOP NAVBAR ========== -->
-  <?php include('includes/topbar.php');?> 
+  <?php // include('includes/topbar.php');?> 
             <!-- ========== WRAPPER FOR BOTH SIDEBARS & MAIN CONTENT ========== -->
             <div class="content-wrapper">
                 <div class="content-container">

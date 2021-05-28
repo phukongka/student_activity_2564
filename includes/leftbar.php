@@ -46,8 +46,8 @@
                                             <li><a href="manage-time.php"><i class="fa fa fa-server"></i> <span>Manage Time</span></a></li>
                                            
                                         </ul>
-                                        <li><a href="change-profile.php"><i class="fa fa fa-users"></i> <span> Admin Change Profile</span></a></li>
-                                        <li><a href="change-password.php"><i class="fa fa fa-server"></i> <span> Admin Change Password</span></a></li>  
+                                        <!-- <li><a href="change-profile.php"><i class="fa fa fa-users"></i> <span> Admin Change Profile</span></a></li> -->
+                                        <!-- <li><a href="change-password.php"><i class="fa fa fa-server"></i> <span> Admin Change Password</span></a></li>   -->
                                     </li>
                             </div>
                             <!-- /.sidebar-nav -->

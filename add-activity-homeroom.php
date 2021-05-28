@@ -172,7 +172,8 @@ include('includes/config.inc.php');
                             
                             
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    <!-- <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li> -->
+                                    <li><button type="button" class="btn btn-primary next-step">ขั้นตอนถัดไป</button></li>
                                 </ul>
                             
                             
@@ -191,8 +192,10 @@ include('includes/config.inc.php');
                         <!-- </form>   -->
 
                             <ul class="list-inline pull-right">
-                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                <!-- <li><button type="button" class="btn btn-default prev-step">Previous</button></li> -->
+                                <!-- <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li> -->
+                                <li><button type="button" class="btn btn-default prev-step">ขั้นตอนก่อนหน้า</button></li>
+                                <li><button type="button" class="btn btn-primary next-step">ขั้นตอนถัดไป</button></li>
                             </ul>
                         
 
@@ -205,16 +208,19 @@ include('includes/config.inc.php');
                               <label for=""></label>
                               <textarea class="form-control" name="" id="" rows="3"></textarea>
                             </div> -->
-                            <form id="step3_form" method="post">
+                            <!-- <form id="step3_form" method="post"> -->
                                 <?php include "add-manage-advisor-risk.php"; ?>
-                            
+                            <!-- </form> -->
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                    <!-- <li><button type="button" class="btn btn-default prev-step">Previous</button></li> -->
+                                    <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
+                                    <!-- <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li> -->
+                                    <li><button type="button" class="btn btn-default prev-step">ขั้นตอนก่อนหน้า</button></li>
+                                    <li><button type="button" class="btn btn-default next-step">ข้าม</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">ขั้นตอนถัดไป</button></li>
                                 </ul>
-                            </form>
+                            
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <h3>Complete</h3>
